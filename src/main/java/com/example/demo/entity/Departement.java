@@ -24,7 +24,7 @@ public class Departement {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private Long idDep;
 	
 	@Enumerated(EnumType.STRING)
 	private ProcessusEnum processus;
@@ -58,20 +58,6 @@ public class Departement {
 		this.effective = effective;
 	}
 
-
-	public Departement(Long id, ProcessusEnum processus) {
-		super();
-		this.id = id;
-		this.processus = processus;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	
 
@@ -132,37 +118,18 @@ public class Departement {
 	}
 
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Departement other = (Departement) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
+	public Long getIdDep() {
+		return idDep;
 	}
 
 
-	@Override
-	public String toString() {
-		return "Departement [id=" + id + ", processus=" + processus + "]";
+	public void setIdDep(Long idDep) {
+		this.idDep = idDep;
 	}
 
+
+
+	
 	
 	
 	

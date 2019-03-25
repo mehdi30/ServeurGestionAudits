@@ -35,7 +35,7 @@ public class DepartementService implements ICrudService<Departement, Long> {
 	@Override
 	public void delete(Long id) {
      Departement depart = new Departement();
-     depart.setId(id);
+     depart.setIdDep(id);
      departementRepository.delete(depart);
 	}
 

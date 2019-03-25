@@ -27,12 +27,12 @@ import com.example.demo.util.ProcessusEnum;
 import com.example.demo.util.RoleEnum;
 
 @SpringBootApplication
-public class ServeurGestionStockProduitsApplication {
+public class ServeurGestionAuditsApplication {
 
 	public static void main(String[] args) {
-		ConfigurableApplicationContext ctx = SpringApplication.run(ServeurGestionStockProduitsApplication.class, args);
+		ConfigurableApplicationContext ctx = SpringApplication.run(ServeurGestionAuditsApplication.class, args);
 
-	/*ProduitRepository produitRepository = ctx.getBean(ProduitRepository.class);
+	ProduitRepository produitRepository = ctx.getBean(ProduitRepository.class);
 		
 	produitRepository.save(new Produit("Livre", 50, 20));
 	produitRepository.save(new Produit("Cahier", 200, 5.25f));	
@@ -81,7 +81,7 @@ public class ServeurGestionStockProduitsApplication {
 		Audit audit1 = new  Audit("procedures");
 
 		auditRepository.save(audit);
-		auditRepository.save(audit1);*/
+		auditRepository.save(audit1);
 
 		/*PlanningProjetRepository planningProjetRepository = ctx.getBean(PlanningProjetRepository.class);
 

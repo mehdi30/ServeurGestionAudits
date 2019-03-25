@@ -15,7 +15,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
@@ -44,7 +48,7 @@ public class User {
     private Departement departement;
     
     @JsonIgnore 
-	@OneToMany(mappedBy="manager")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "manager")
     private List<Projet> projets;  
 	
     @JsonIgnore 

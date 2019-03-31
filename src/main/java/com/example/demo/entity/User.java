@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,17 +15,21 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
+@Table(name = "users")
 public class User {
 
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)      //@Column(name="USER_ID")
 	private Long id;
@@ -43,23 +48,25 @@ public class User {
 	inverseJoinColumns={@JoinColumn(name="ROLE_ID")})
 	private List<Role> roles;
 
-    @JsonIgnore 
-    @ManyToOne(fetch=FetchType.EAGER)
+    //@JsonIgnore
+    @ManyToOne
     private Departement departement;
     
-    @JsonIgnore 
+    @JsonIgnore
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "manager")
     private List<Projet> projets;  
 	
-    @JsonIgnore 
+    @JsonIgnore
 	@OneToMany(mappedBy="auditeur",cascade = CascadeType.ALL)
     private List<PlanningProjet> planningProjets;
     
-    @JsonIgnore 
+    
+    ///plandep
+    @JsonIgnore
 	@OneToMany(mappedBy="auditeur",cascade = CascadeType.ALL)
     private List<PlanningDepart> planningDepartAuditeur;
 
-    @JsonIgnore 
+    @JsonIgnore
 	@OneToMany(mappedBy="audite",cascade = CascadeType.ALL)
     private List<PlanningDepart> planningDepartAudite;
     

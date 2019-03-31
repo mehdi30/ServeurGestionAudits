@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @IdClass(PlanningDepartPk.class)
-public class PlanningDepart implements Serializable {
+public class PlanningDepart {
 
 	/*
 	 * @EmbeddedId private PlanningDepartPk planningDepartPk;
@@ -41,27 +41,27 @@ public class PlanningDepart implements Serializable {
 	@Id
 	private Long idDepartement;
 
-	@JsonIgnore
+	
 	@ManyToOne
 	@JoinColumn(name = "idAudit", referencedColumnName = "id", insertable = false, updatable = false)
 	private Audit audit;
 
-	@JsonIgnore
+	
 	@ManyToOne // insertable=false,updatable=false c'est pas la responsabilite planning projet
 				// d'ajouter ou màj l'auditeur
 	@JoinColumn(name = "idAuditeur", referencedColumnName = "id", insertable = false, updatable = false)
 	private User auditeur;
 
-	@JsonIgnore
+	
 	@ManyToOne // insertable=false,updatable=false c'est pas la responsabilite planning projet
 				// d'ajouter ou màj l'auditeur
 	@JoinColumn(name = "idAudite", referencedColumnName = "id", insertable = false, updatable = false)
 	private User audite;
 
-	@JsonIgnore
+	
 	@ManyToOne
-	@JoinColumn(name = "idDepartement", referencedColumnName = "id", insertable = false, updatable = false)
-	private Projet departement;
+	@JoinColumn(name = "idDepartement", referencedColumnName = "idDep", insertable = false, updatable = false)
+	private Departement departement;
 
 	public PlanningDepart() {
 		super();
@@ -91,13 +91,7 @@ public class PlanningDepart implements Serializable {
 		this.auditeur = auditeur;
 	}
 
-	public Projet getDepartement() {
-		return departement;
-	}
-
-	public void setDepartement(Projet departement) {
-		this.departement = departement;
-	}
+	
 
 	public Long getIdAudit() {
 		return idAudit;
@@ -146,6 +140,16 @@ public class PlanningDepart implements Serializable {
 	public void setAudite(User audite) {
 		this.audite = audite;
 	}
+
+	public Departement getDepartement() {
+		return departement;
+	}
+
+	public void setDepartement(Departement departement) {
+		this.departement = departement;
+	}
+	
+	
 
 	
 }

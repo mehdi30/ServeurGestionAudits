@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.entity.Departement;
 import com.example.demo.entity.User;
 import com.example.demo.respository.UserRepository;
 
@@ -21,6 +22,13 @@ public class UserService implements ICrudService<User, Long>{
 		return userRepository.findAll();
 	}
 
+	
+	public List<User> getAllUserByDepartement(Long id) {
+		Departement departement = new Departement();
+		departement.setIdDep(id);
+		return userRepository.findByDepartement(departement);
+	}
+	
 	@Override
 	public void add(User user) {
 		userRepository.save(user);

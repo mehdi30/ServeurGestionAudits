@@ -17,6 +17,7 @@ public class Audit {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
+    
     private String procedures;
     
     @JsonIgnore 
@@ -28,14 +29,13 @@ public class Audit {
     private List<PlanningDepart> planningDepart;
 
     
+	
 	public Long getId() {
 		return id;
 	}
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	
 	public List<PlanningProjet> getPlanningProjets() {
 		return planningProjets;
 	}

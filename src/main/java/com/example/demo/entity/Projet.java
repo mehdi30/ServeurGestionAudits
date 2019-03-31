@@ -1,6 +1,9 @@
 package com.example.demo.entity;
 
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -8,6 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -21,15 +28,18 @@ public class Projet {
     private Long id;
     private String title;
     
-    
     // @JsonIgnore 
     //Pour éviter la boule infini lors de la serialisation vers JSON
     //Failed to write HTTP message: org.springframework.http.converter.HttpMessageNotWritableException: Could not write JSON: 
     //Infinite recursion (StackOverflowError)
-    @JsonIgnore 
+     
+    @OnDelete(action=OnDeleteAction.CASCADE)
 	@ManyToOne
     private User manager;
 
+	 @JsonIgnore 
+	 @OneToMany(mappedBy="projet",cascade = CascadeType.ALL)
+	 private List<PlanningProjet> planningProjets;
     
 
 	public Projet(String title) {

@@ -38,6 +38,7 @@ public class ProjetService implements ICrudService<Projet, Long>{
 		Projet projet = new Projet();
 		projet.setId(id);
 		projetRepository.delete(projet);
+		
 	}
 
 }

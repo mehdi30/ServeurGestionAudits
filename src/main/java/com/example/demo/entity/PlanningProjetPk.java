@@ -9,15 +9,22 @@ import javax.persistence.GenerationType;
 @Embeddable
 public class PlanningProjetPk implements Serializable{
 
+	private Long numPlanning;
 
 	private Long idAudit;
 	
 	private Long idAuditeur;
 	
-	private Long numPlanning;
 
 	private Long idProjet;
 
+	public void setIdAuditeur(Long idAuditeur) {
+		this.idAuditeur = idAuditeur;
+	}
+
+	public Long getNumPlanning() {
+		return numPlanning;
+	}
 	public Long getIdAudit() {
 		return idAudit;
 	}
@@ -30,13 +37,7 @@ public class PlanningProjetPk implements Serializable{
 		return idAuditeur;
 	}
 
-	public void setIdAuditeur(Long idAuditeur) {
-		this.idAuditeur = idAuditeur;
-	}
-
-	public Long getNumPlanning() {
-		return numPlanning;
-	}
+	
 
 	public void setNumPlanning(Long numPlanning) {
 		this.numPlanning = numPlanning;

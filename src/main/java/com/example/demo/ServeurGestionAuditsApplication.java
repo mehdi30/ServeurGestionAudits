@@ -32,7 +32,7 @@ public class ServeurGestionAuditsApplication {
 	public static void main(String[] args) {
 		ConfigurableApplicationContext ctx = SpringApplication.run(ServeurGestionAuditsApplication.class, args);
 
-	ProduitRepository produitRepository = ctx.getBean(ProduitRepository.class);
+	/*ProduitRepository produitRepository = ctx.getBean(ProduitRepository.class);
 		
 	produitRepository.save(new Produit("Livre", 50, 20));
 	produitRepository.save(new Produit("Cahier", 200, 5.25f));	
@@ -44,7 +44,6 @@ public class ServeurGestionAuditsApplication {
 	
 	departementRepository.save(new Departement(ProcessusEnum.Technique,54));
 	departementRepository.save(new Departement(ProcessusEnum.Administrative, 55));
-	//departementRepository.save(new Departement("commerciale",89));
 
 	   
 	  
@@ -83,29 +82,29 @@ public class ServeurGestionAuditsApplication {
 		auditRepository.save(audit);
 		auditRepository.save(audit1);
 
-		/*PlanningProjetRepository planningProjetRepository = ctx.getBean(PlanningProjetRepository.class);
+		/*
+		PlanningProjetRepository planningProjetRepository = ctx.getBean(PlanningProjetRepository.class);
 
 		PlanningProjet plan1 = new PlanningProjet();
 		planningProjetRepository.save(plan1);
 		admin.setPlanningProjets(Arrays.asList(plan1));
-		userRepository.save(admin);*/
+		userRepository.save(admin);
 
-		//PlanningProjet plan1 = new PlanningProjet(1l,audit,admin);
-		//planningProjetRepository.save(plan1);
+	
 		
-		/*PlanningProjetPk planningProjetPk = new PlanningProjetPk();
+		PlanningProjetPk planningProjetPk = new PlanningProjetPk();
 
-		/planningProjetPk.setIdAudit(audit.getId());
+		planningProjetPk.setIdAudit(audit.getId());
 		planningProjetPk.setIdAuditeur(admin.getId());
-		*/
-		/*
+		
+		
 		PlanningProjet planningProjet = new PlanningProjet();
 		planningProjet.setAudit(audit1);
 		planningProjet.setAuditeur(user);
 		planningProjet.setNumPlanning(2l);
 		planningProjetRepository.save(planningProjet);
-		*/
-		/*
+		
+		
 		PlanningProjetPk planningProjetPk2 = new PlanningProjetPk();
 
 		
@@ -116,6 +115,7 @@ public class ServeurGestionAuditsApplication {
 		planningProjet1.setPlanningProjetPk(planningProjetPk2);
 
 		planningProjetRepository.save(planningProjet1);*/
+		
 		}
 	
 	

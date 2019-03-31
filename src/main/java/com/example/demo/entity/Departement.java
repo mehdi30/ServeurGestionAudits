@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -17,10 +18,14 @@ import javax.persistence.TemporalType;
 
 import com.example.demo.util.ProcessusEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 
 @Entity
 public class Departement {
+
+	
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,12 +36,10 @@ public class Departement {
 
 	private int effective;
 	
-	  
-    @JsonIgnore 
+	/* 
 	@OneToMany(mappedBy="departement")
-    private List<User> Employe;  
+    private List<User> Employe;  */
 	
-    @JsonIgnore 
 	@OneToMany(mappedBy="departement",cascade = CascadeType.ALL)
     private List<PlanningDepart> planningDepart;
 
@@ -64,7 +67,7 @@ public class Departement {
 	
 
 
-
+/*
 	public List<User> getEmploye() {
 		return Employe;
 	}
@@ -72,7 +75,7 @@ public class Departement {
 
 	public void setEmploye(List<User> employe) {
 		Employe = employe;
-	}
+	}*/
 
 
 	public List<PlanningDepart> getPlanningDepart() {
@@ -127,6 +130,10 @@ public class Departement {
 		this.idDep = idDep;
 	}
 
+
+	
+
+	
 
 
 	

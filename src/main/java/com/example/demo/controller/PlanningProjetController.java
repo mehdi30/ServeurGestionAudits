@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.example.demo.entity.PlanningProjet;
 import com.example.demo.entity.PlanningProjetPk;
 import com.example.demo.service.PlanningProjetService;
@@ -27,6 +26,17 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 	@Autowired
 	private PlanningProjetService planningProjetService;
 	
+	@RequestMapping("/List/Planifie")
+	public List<PlanningProjet> AllPlanifie(){
+		return planningProjetService.getAllPlanifie();
+		
+	}
+	
+	@RequestMapping("/List/Realise")
+	public List<PlanningProjet> AllRealise(){
+		return planningProjetService.getAllRealise();
+		
+	}
 	
 	@RequestMapping("/Add")
 	public ResponseEntity addPlanningProjet(@RequestBody HashMap<String, Object>mapper) {
@@ -53,6 +63,7 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 		planningProjet.setIdProjet(idProjet);
 		planningProjet.setIdAuditeur(idAuditeur);
 		planningProjet.setDatePlan(datePlan);
+		
 		//planningProjet.setPlanningProjetPk(planningPk);
 		
 		planningProjetService.add(planningProjet);

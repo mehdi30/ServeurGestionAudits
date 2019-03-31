@@ -53,18 +53,20 @@ public class PlanningProjet implements Serializable{
 	
 	
 	private LocalDate datePlan;
-    @JsonIgnore 
+     
+	private boolean etat = false;
+	
 	@ManyToOne
 	@JoinColumn(name="idAudit",referencedColumnName="id",insertable=false,updatable=false)
 	private Audit audit;
 	
-    @JsonIgnore 
+     
 	@ManyToOne   //insertable=false,updatable=false c'est pas la responsabilite planning projet d'ajouter ou màj l'auditeur
 	@JoinColumn(name="idAuditeur",referencedColumnName="id",insertable=false,updatable=false)
 	private User auditeur;
 	
     
-    @JsonIgnore 
+     
     @ManyToOne
     @JoinColumn(name="idProjet",referencedColumnName="id",insertable=false,updatable=false)
     private Projet projet;
@@ -235,6 +237,26 @@ public class PlanningProjet implements Serializable{
 
 	public void setDatePlan(LocalDate datePlan) {
 		this.datePlan = datePlan;
+	}
+
+
+
+
+
+
+
+	public boolean isEtat() {
+		return etat;
+	}
+
+
+
+
+
+
+
+	public void setEtat(boolean etat) {
+		this.etat = etat;
 	}
 
 

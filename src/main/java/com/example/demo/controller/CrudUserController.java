@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,13 +15,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Role;
 import com.example.demo.entity.User;
 import com.example.demo.respository.RoleRepository;
+import com.example.demo.respository.UserRepository;
 import com.example.demo.service.ICrudService;
+import com.example.demo.service.UserService;
 import com.example.demo.util.RoleEnum;
+
 
 @RestController
 @RequestMapping("/crud_user")
@@ -29,6 +36,8 @@ public class CrudUserController extends CrudController<User, Long>{
 	@Autowired
 	private RoleRepository roleRepository;
 	
+	@Autowired
+	private UserService userService;
 	@Override
 	public List<User> getAll(){
 		List<User> users = super.getAll();
@@ -45,4 +54,10 @@ public class CrudUserController extends CrudController<User, Long>{
 		user.setEnable(true);
 		super.add(user);
 	}
+	
+	  @RequestMapping(value = "/departement/{depId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	    public List<User> getDepartement(@PathVariable("depId") Long depId) {
+	    	return userService.getAllUserByDepartement(depId);
+	       
+	    }
 }

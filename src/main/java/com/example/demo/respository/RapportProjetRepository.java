@@ -7,4 +7,5 @@ import com.example.demo.entity.RapportProjet;
 
 public interface RapportProjetRepository  extends JpaRepository<RapportProjet, Long>{
 
+	RapportProjet findByPlanningProjetNumPlanning(Long num);
 }

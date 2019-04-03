@@ -16,9 +16,12 @@ public class RapportProjetService implements ICrudService<RapportProjet, Long>{
 	@Autowired
 	RapportProjetRepository rapportProjetRepository;
 	
+	public RapportProjet getByNumPlanning(Long num) {
+		return rapportProjetRepository.findByPlanningProjetNumPlanning(num);
+	}
+	
 	@Override
 	public List<RapportProjet> getAll() {
-		// TODO Auto-generated method stub
 		return rapportProjetRepository.findAll();
 	}
 

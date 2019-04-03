@@ -40,10 +40,18 @@ public class RapportProjetController extends CrudController<RapportProjet, Long>
 		PlanningProjet planning = planningProjetRepository.findByNumPlanning(numPlanning);
 		//RapportProjet rapport = new RapportProjet();
 		//rapport.setContexte(contexte);
+		planning.setEtat(true);
 		rapport.setPlanningProjet(planning);
 		rapportProjetService.add(rapport);
 		
 		return new ResponseEntity<>(HttpStatus.OK);
+
+	}
+	
+	@RequestMapping(value="/details/{numPlanning}", method = RequestMethod.GET)
+	public RapportProjet getByNumPlanning(@PathVariable Long numPlanning) {
+		
+		return rapportProjetService.getByNumPlanning(numPlanning);
 
 	}
 }

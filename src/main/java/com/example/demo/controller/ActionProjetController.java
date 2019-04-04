@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 
@@ -52,13 +53,35 @@ public class ActionProjetController extends CrudController<ActionProjet, Long> {
 
 	}
 
-	@RequestMapping(value = "/UAP/{id}", method = RequestMethod.PUT)
+	/*@RequestMapping(value = "/UAP/{id}", method = RequestMethod.PUT)
 	public void validerActionProjet(@RequestBody HashMap<String, Object> mapper, @PathVariable Long id) {
 		String methode = ((String) mapper.get("methode"));
+		String efficacite = ((String) mapper.get("efficacite"));
+		String commentaire = ((String) mapper.get("commentaire"));
+		String status = ((String) mapper.get("status"));
 
 		ActionProjet action = actionProjetRepository.getOne(id);
+		EfficaciteEnum  h = ;
+	    h.setName(efficacite);
+		action.setEfficacite(h);
+		StatusEnum sta = action.getStatus();
+		sta.setName(status);
+		action.setStatus(sta);
+		
+
 		action.setMethode(methode);
+		action.setCommentaire(commentaire);
+		
 		actionProjetService.update(action);
+
+	}*/
+	@RequestMapping(value = "/UAP/{id}", method = RequestMethod.PUT)
+	public void validerActionProjet(@RequestBody ActionProjet action, @PathVariable Long id) {
+		
+
+
+		
+		actionProjetService.updateActionProjet(id, action);
 
 	}
 

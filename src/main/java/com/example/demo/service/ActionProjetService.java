@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,7 @@ public class ActionProjetService implements  ICrudService<ActionProjet, Long>,IA
 	@Autowired
 	ActionProjetRepository actionProjetRepository;
 	
-	/*@Override
+	@Override
 	public void updateActionProjet(Long id, ActionProjet c) {
 		// TODO Auto-generated method stub
 		try {
@@ -26,12 +27,20 @@ public class ActionProjetService implements  ICrudService<ActionProjet, Long>,IA
 			if(a!= null) {
 				ActionProjet obj = a;
 				obj.setMethode(c.getMethode());
+				obj.setCommentaire(c.getCommentaire());
+				obj.setStatus(c.getStatus());
+				obj.setEfficacite(c.getEfficacite());
+				obj.setNumero(c.getNumero());
+				LocalDate currentDate = LocalDate.now();
+                 
+                   obj.setDateRealisation(currentDate);
+
 				actionProjetRepository.save(obj);
 			}
 		}catch (Exception e) {
 			//logger.error(e.getMessage());
 		}
-	}*/
+	}
 	public List<ActionProjet> getByStatus(StatusEnum status){
 		return actionProjetRepository.findByStatus(status);
 	}

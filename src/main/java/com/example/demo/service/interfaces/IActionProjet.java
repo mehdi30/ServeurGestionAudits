@@ -8,4 +8,5 @@ import com.example.demo.util.StatusEnum;
 public interface IActionProjet {
 	
 	List<ActionProjet> getByStatus(StatusEnum status);
+	void updateActionProjet(Long id, ActionProjet c) ;
 }

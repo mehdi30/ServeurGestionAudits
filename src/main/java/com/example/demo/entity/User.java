@@ -61,15 +61,7 @@ public class User {
     private List<PlanningProjet> planningProjets;
     
     
-    ///plandep
-    @JsonIgnore
-	@OneToMany(mappedBy="auditeur",cascade = CascadeType.ALL)
-    private List<PlanningDepart> planningDepartAuditeur;
-
-    @JsonIgnore
-	@OneToMany(mappedBy="audite",cascade = CascadeType.ALL)
-    private List<PlanningDepart> planningDepartAudite;
-    
+ 
 	public List<PlanningProjet> getPlanningProjets() {
 		return planningProjets;
 	}
@@ -143,22 +135,6 @@ public class User {
 
 	public void setDepartement(Departement departement) {
 		this.departement = departement;
-	}
-
-	public List<PlanningDepart> getPlanningDepartAuditeur() {
-		return planningDepartAuditeur;
-	}
-
-	public void setPlanningDepartAuditeur(List<PlanningDepart> planningDepartAuditeur) {
-		this.planningDepartAuditeur = planningDepartAuditeur;
-	}
-
-	public List<PlanningDepart> getPlanningDepartAudite() {
-		return planningDepartAudite;
-	}
-
-	public void setPlanningDepartAudite(List<PlanningDepart> planningDepartAudite) {
-		this.planningDepartAudite = planningDepartAudite;
 	}
 
 	

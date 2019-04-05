@@ -40,8 +40,9 @@ public class Departement {
 	@OneToMany(mappedBy="departement")
     private List<User> Employe;  */
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="departement",cascade = CascadeType.ALL)
-    private List<PlanningDepart> planningDepart;
+    private List<PlanningProjet> planningProjet;
 
 	private LocalDate date;
 	public Departement() {
@@ -78,15 +79,7 @@ public class Departement {
 	}*/
 
 
-	public List<PlanningDepart> getPlanningDepart() {
-		return planningDepart;
-	}
-
-
-	public void setPlanningDepart(List<PlanningDepart> planningDepart) {
-		this.planningDepart = planningDepart;
-	}
-
+	
 
 	public LocalDate getDate() {
 		return date;
@@ -128,6 +121,16 @@ public class Departement {
 
 	public void setIdDep(Long idDep) {
 		this.idDep = idDep;
+	}
+
+
+	public List<PlanningProjet> getPlanningProjet() {
+		return planningProjet;
+	}
+
+
+	public void setPlanningProjet(List<PlanningProjet> planningProjet) {
+		this.planningProjet = planningProjet;
 	}
 
 

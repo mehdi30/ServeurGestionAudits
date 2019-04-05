@@ -24,10 +24,6 @@ public class Audit {
     @OneToMany(mappedBy="audit",cascade = CascadeType.ALL)
     private List<PlanningProjet> planningProjets;
     
-    @JsonIgnore 
-	@OneToMany(mappedBy="audit",cascade = CascadeType.ALL)
-    private List<PlanningDepart> planningDepart;
-
     
 	
 	public Long getId() {
@@ -52,15 +48,10 @@ public class Audit {
 	public void setProcedures(String procedures) {
 		this.procedures = procedures;
 	}
-	public List<PlanningDepart> getPlanningDepart() {
-		return planningDepart;
-	}
+	
 	public Audit(String procedures) {
 		super();
 		this.procedures = procedures;
-	}
-	public void setPlanningDepart(List<PlanningDepart> planningDepart) {
-		this.planningDepart = planningDepart;
 	}
 	
     

@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.PlanningProjet;
 import com.example.demo.entity.PlanningProjetPk;
+import com.example.demo.entity.Projet;
+import com.example.demo.respository.ProjetRepository;
 import com.example.demo.service.PlanningProjetService;
+import com.example.demo.service.ProjetService;
 
 @RestController
 @RequestMapping("/Planning_Projet")
@@ -25,6 +28,8 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 
 	@Autowired
 	private PlanningProjetService planningProjetService;
+	@Autowired
+	private ProjetRepository projetRepository;
 	
 	@RequestMapping("/List/Planifie")
 	public List<PlanningProjet> AllPlanifie(){
@@ -60,9 +65,15 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 		planningPk.setNumPlanning(num);*/
 		PlanningProjet planningProjet = new PlanningProjet();
 		planningProjet.setIdAudit(idAudit);
+		//Projet p = projetRepository.getOne(idProjet);
+		
+		//Projet projet = p;
+		//projet.setId(idProjet);	
 		planningProjet.setIdProjet(idProjet);
 		planningProjet.setIdAuditeur(idAuditeur);
 		planningProjet.setDatePlan(datePlan);
+		//planningProjet.setProjet(projet);
+
 		
 		//planningProjet.setPlanningProjetPk(planningPk);
 		

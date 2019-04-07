@@ -34,9 +34,11 @@ public class User {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)      //@Column(name="USER_ID")
 	private Long id;
 	
-	@Column(unique=true)
+	//@Column(unique=true)
 	private String username;
 	
+	private String lastname;
+
 	private String password;
 	
 	private boolean enable;
@@ -60,7 +62,10 @@ public class User {
 	@OneToMany(mappedBy="auditeur",cascade = CascadeType.ALL)
     private List<PlanningProjet> planningProjets;
     
-    
+
+    @JsonIgnore
+	@OneToMany(mappedBy="audite",cascade = CascadeType.ALL)
+    private List<PlanningProjet> planningProjetsA;
  
 	public List<PlanningProjet> getPlanningProjets() {
 		return planningProjets;
@@ -135,6 +140,22 @@ public class User {
 
 	public void setDepartement(Departement departement) {
 		this.departement = departement;
+	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public List<PlanningProjet> getPlanningProjetsA() {
+		return planningProjetsA;
+	}
+
+	public void setPlanningProjetsA(List<PlanningProjet> planningProjetsA) {
+		this.planningProjetsA = planningProjetsA;
 	}
 
 	

@@ -25,6 +25,7 @@ import com.example.demo.respository.RoleRepository;
 import com.example.demo.respository.UserRepository;
 import com.example.demo.util.ProcessusEnum;
 import com.example.demo.util.RoleEnum;
+import com.example.demo.util.TypeProjetEnum;
 
 @SpringBootApplication
 public class ServeurGestionAuditsApplication {
@@ -59,25 +60,34 @@ public class ServeurGestionAuditsApplication {
 		
 		UserRepository userRepository = ctx.getBean(UserRepository.class);
 
-		User user = new User("user", "password1", true);
+		User user = new User("Hanen", "password1", true);
+		user.setLastname("Chakroun");
 		user.setRoles(Arrays.asList(roleUser));
 
 		userRepository.save(user);
+		
+		User user1 = new User("Farah", "password1", true);
+		user1.setLastname("Krichen");
+		user1.setRoles(Arrays.asList(roleUser));
 
-		User admin = new User("admin", "password2", true);
+		userRepository.save(user1);
+
+		User admin = new User("Mehdi", "password2", true);
+		admin.setLastname("Gaies");
 		admin.setRoles(Arrays.asList(roleUser, roleAdmin));
 		userRepository.save(admin);
 		
 		
 		  ProjetRepository projetRepository = ctx.getBean(ProjetRepository.class);
-		    Projet projet = new Projet("haha");
-		    projet.setManager(admin);
+		    Projet projet = new Projet("Dev 01");
+		    projet.setManager(user1);
+		    projet.setTypeProjet(TypeProjetEnum.TMA);
 		    projetRepository.save(projet);
 		
 		
 		AuditRepository auditRepository = ctx.getBean(AuditRepository.class);
-		Audit audit = new  Audit("procedures");
-		Audit audit1 = new  Audit("procedures");
+		Audit audit = new  Audit("SWOT W1");
+		Audit audit1 = new  Audit("SWOT W2");
 
 		auditRepository.save(audit);
 		auditRepository.save(audit1);

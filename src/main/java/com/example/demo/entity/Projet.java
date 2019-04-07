@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,6 +18,8 @@ import javax.persistence.OneToMany;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import com.example.demo.util.EfficaciteEnum;
+import com.example.demo.util.TypeProjetEnum;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -36,6 +40,9 @@ public class Projet {
     @OnDelete(action=OnDeleteAction.CASCADE)
 	@ManyToOne
     private User manager;
+    
+    @Enumerated(EnumType.STRING)
+    private TypeProjetEnum typeProjet;
 
 	 @JsonIgnore 
 	 @OneToMany(mappedBy="projet",cascade = CascadeType.ALL)
@@ -80,6 +87,26 @@ public class Projet {
 
 	public void setManager(User manager) {
 		this.manager = manager;
+	}
+
+
+	public TypeProjetEnum getTypeProjet() {
+		return typeProjet;
+	}
+
+
+	public void setTypeProjet(TypeProjetEnum typeProjet) {
+		this.typeProjet = typeProjet;
+	}
+
+
+	public List<PlanningProjet> getPlanningProjets() {
+		return planningProjets;
+	}
+
+
+	public void setPlanningProjets(List<PlanningProjet> planningProjets) {
+		this.planningProjets = planningProjets;
 	}
 
 

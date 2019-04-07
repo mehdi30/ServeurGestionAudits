@@ -9,6 +9,8 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +20,8 @@ import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.example.demo.util.EfficaciteEnum;
+import com.example.demo.util.TypePlanningEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -48,12 +52,19 @@ public class PlanningProjet implements Serializable {
 
 	
 	private Long idProjet;
+	
+	private Long idAudite;
 
 	private Long idDepartement;
 
 	private LocalDate datePlan;
 
 	private boolean etat = false;
+	
+	private String description;
+
+	@Enumerated(EnumType.STRING)
+    private TypePlanningEnum typePlanning;
 
 	@ManyToOne
 	@JoinColumn(name = "idAudit", referencedColumnName = "id", insertable = false, updatable = false)
@@ -63,6 +74,10 @@ public class PlanningProjet implements Serializable {
 	@JoinColumn(name = "idAuditeur", referencedColumnName = "id", insertable = false, updatable = false)
 	private User auditeur;
 
+	@ManyToOne 
+	@JoinColumn(name = "idAudite", referencedColumnName = "id", insertable = false, updatable = false)
+	private User audite;
+	
 	@ManyToOne
 	@JoinColumn(name = "idProjet", referencedColumnName = "id", insertable = false, updatable = false)
 	private Projet projet;
@@ -183,6 +198,38 @@ public class PlanningProjet implements Serializable {
 
 	public void setDepartement(Departement departement) {
 		this.departement = departement;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public TypePlanningEnum getTypePlanning() {
+		return typePlanning;
+	}
+
+	public void setTypePlanning(TypePlanningEnum typePlanning) {
+		this.typePlanning = typePlanning;
+	}
+
+	public Long getIdAudite() {
+		return idAudite;
+	}
+
+	public void setIdAudite(Long idAudite) {
+		this.idAudite = idAudite;
+	}
+
+	public User getAudite() {
+		return audite;
+	}
+
+	public void setAudite(User audite) {
+		this.audite = audite;
 	}
 
 	///////////////////////////////////

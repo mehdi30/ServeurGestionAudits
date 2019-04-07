@@ -35,6 +35,8 @@ public class Departement {
 	private ProcessusEnum processus;
 
 	private int effective;
+	private String Nom;
+
 	
 	/* 
 	@OneToMany(mappedBy="departement")
@@ -131,6 +133,16 @@ public class Departement {
 
 	public void setPlanningProjet(List<PlanningProjet> planningProjet) {
 		this.planningProjet = planningProjet;
+	}
+
+
+	public String getNom() {
+		return Nom;
+	}
+
+
+	public void setNom(String nom) {
+		Nom = nom;
 	}
 
 

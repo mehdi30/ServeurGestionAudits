@@ -12,14 +12,12 @@ import com.example.demo.entity.Audit;
 import com.example.demo.entity.Departement;
 import com.example.demo.entity.PlanningProjet;
 import com.example.demo.entity.PlanningProjetPk;
-import com.example.demo.entity.Produit;
 import com.example.demo.entity.Projet;
 import com.example.demo.entity.Role;
 import com.example.demo.entity.User;
 import com.example.demo.respository.AuditRepository;
 import com.example.demo.respository.DepartementRepository;
 import com.example.demo.respository.PlanningProjetRepository;
-import com.example.demo.respository.ProduitRepository;
 import com.example.demo.respository.ProjetRepository;
 import com.example.demo.respository.RoleRepository;
 import com.example.demo.respository.UserRepository;
@@ -33,18 +31,14 @@ public class ServeurGestionAuditsApplication {
 	public static void main(String[] args) {
 		ConfigurableApplicationContext ctx = SpringApplication.run(ServeurGestionAuditsApplication.class, args);
 
-	/*ProduitRepository produitRepository = ctx.getBean(ProduitRepository.class);
-		
-	produitRepository.save(new Produit("Livre", 50, 20));
-	produitRepository.save(new Produit("Cahier", 200, 5.25f));	
-	produitRepository.save(new Produit("Stylo", 500, 2.10f));	
 	
+	/*
 	
 	
 	DepartementRepository departementRepository = ctx.getBean(DepartementRepository.class);
 	
-	departementRepository.save(new Departement(ProcessusEnum.Technique,54));
-	departementRepository.save(new Departement(ProcessusEnum.Administrative, 55));
+	departementRepository.save(new Departement(ProcessusEnum.Technique,"lac 2"));
+	departementRepository.save(new Departement(ProcessusEnum.Administrative, "pole"));
 
 	   
 	  

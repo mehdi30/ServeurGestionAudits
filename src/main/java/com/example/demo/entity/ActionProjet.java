@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -22,12 +23,16 @@ public class ActionProjet {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 	
+    @Column(length = 1024)
     private String contexte;
+    @Column(length = 1024)
     private String action;
 	private LocalDate delai;
 	private LocalDate dateEvaluation;
 	private LocalDate dateRealisation;
+    @Column(length = 1024)
     private String methode;
+    @Column(length = 1024)
     private String commentaire;
     private Long numero;
 
@@ -46,6 +51,12 @@ public class ActionProjet {
 	
     @ManyToOne
     private PlanningProjet planningProjet;
+    
+    @ManyToOne
+    private Source source;
+    
+    @ManyToOne
+    private EnJeux enJeux;
 
 
 	public Long getId() {
@@ -191,6 +202,26 @@ public class ActionProjet {
 
 	public void setNumero(Long numero) {
 		this.numero = numero;
+	}
+
+
+	public Source getSource() {
+		return source;
+	}
+
+
+	public void setSource(Source source) {
+		this.source = source;
+	}
+
+
+	public EnJeux getEnJeux() {
+		return enJeux;
+	}
+
+
+	public void setEnJeux(EnJeux enJeux) {
+		this.enJeux = enJeux;
 	}
 
 

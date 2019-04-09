@@ -61,14 +61,11 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 
 		planningProjet.setIdAudit(idAudit);
 		planningProjet.setDescription(description);
-		if (typePlanning.equals("Externe")) {
+		
 
-			planningProjet.setTypePlanning(TypePlanningEnum.Externe);
+			planningProjet.setTypePlanning(TypePlanningEnum.valueOf(typePlanning));
 
-		} else {
-			planningProjet.setTypePlanning(TypePlanningEnum.Interne);
-
-		}
+		
 		planningProjet.setIdAuditeur(idAuditeur);
 		planningProjet.setDatePlan(datePlan);
 
@@ -83,6 +80,7 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 		Long idAudit = Long.parseLong((String) mapper.get("audit"));
 		Long idDep = Long.parseLong((String) mapper.get("departement"));
 		Long idAudite = Long.parseLong((String) mapper.get("audite"));
+		String description = ((String) mapper.get("description"));
 
 		Long idAuditeur = Long.parseLong((String) mapper.get("user"));
 		LocalDate datePlan = LocalDate.parse((String) mapper.get("datePlan"));
@@ -99,14 +97,10 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 		 */
 
 		planningProjet.setIdAudit(idAudit);
-		if (typePlanning.equals("Externe")) {
+		planningProjet.setTypePlanning(TypePlanningEnum.valueOf(typePlanning));
 
-			planningProjet.setTypePlanning(TypePlanningEnum.Externe);
+		planningProjet.setDescription(description);
 
-		} else {
-			planningProjet.setTypePlanning(TypePlanningEnum.Interne);
-
-		}
 		planningProjet.setIdAudite(idAudite);
 
 		planningProjet.setIdAuditeur(idAuditeur);

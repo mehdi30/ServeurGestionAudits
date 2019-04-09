@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,10 +14,15 @@ public class RapportProjet {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 	
+    @Column(length = 1024)
     private String contexte;
+    @Column(length = 1024)
     private String force;
+    @Column(length = 1024)
     private String risque;
-    private String amélioration;
+    @Column(length = 1024)
+    private String amelioration;
+    @Column(length = 1024)
     private String conclusion;
     
     
@@ -69,13 +75,13 @@ public class RapportProjet {
 	}
 
 
-	public String getAmélioration() {
-		return amélioration;
+	public String getAmelioration() {
+		return amelioration;
 	}
 
 
-	public void setAmélioration(String amélioration) {
-		this.amélioration = amélioration;
+	public void setAmelioration(String amélioration) {
+		this.amelioration = amélioration;
 	}
 
 

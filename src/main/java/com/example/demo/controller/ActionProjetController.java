@@ -46,7 +46,7 @@ public class ActionProjetController extends CrudController<ActionProjet, Long> {
 		// planning.setEtat(true);
 		action.setPlanningProjet(planning);
 		action.setStatus(StatusEnum.Planifiée);
-		action.setEfficacite(EfficaciteEnum.NonEfficace);
+		//action.setEfficacite(EfficaciteEnum.NonEfficace);
 		actionProjetService.add(action);
 
 		return new ResponseEntity<>(HttpStatus.OK);

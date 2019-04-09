@@ -61,6 +61,7 @@ public class PlanningProjet implements Serializable {
 
 	private boolean etat = false;
 	
+    @Column(length = 1024)
 	private String description;
 
 	@Enumerated(EnumType.STRING)

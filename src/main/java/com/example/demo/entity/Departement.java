@@ -34,19 +34,13 @@ public class Departement {
 	@Enumerated(EnumType.STRING)
 	private ProcessusEnum processus;
 
-	private int effective;
-	private String Nom;
+	private String nom;
 
-	
-	/* 
-	@OneToMany(mappedBy="departement")
-    private List<User> Employe;  */
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="departement",cascade = CascadeType.ALL)
     private List<PlanningProjet> planningProjet;
 
-	private LocalDate date;
 	public Departement() {
 		super();
 	}
@@ -58,52 +52,25 @@ public class Departement {
 	}
 
 
-	public Departement(ProcessusEnum processus, int effective) {
+	
+
+
+	
+
+	
+
+
+	
+
+	
+	 
+
+
+	public Departement(ProcessusEnum processus, String nom) {
 		super();
 		this.processus = processus;
-		this.effective = effective;
+		this.nom = nom;
 	}
-
-
-	
-
-	
-
-
-/*
-	public List<User> getEmploye() {
-		return Employe;
-	}
-
-
-	public void setEmploye(List<User> employe) {
-		Employe = employe;
-	}*/
-
-
-	
-
-	public LocalDate getDate() {
-		return date;
-	}
-
-
-	public void setDate(LocalDate date) {
-		this.date = date;
-	}
-
-
-	public int getEffective() {
-		return effective;
-	}
-
-
-	public void setEffective(int effective) {
-		this.effective = effective;
-	}
-
-
-	 
 
 
 	public ProcessusEnum getProcessus() {
@@ -137,15 +104,16 @@ public class Departement {
 
 
 	public String getNom() {
-		return Nom;
+		return nom;
 	}
 
 
 	public void setNom(String nom) {
-		Nom = nom;
+		this.nom = nom;
 	}
 
 
+	
 	
 
 	

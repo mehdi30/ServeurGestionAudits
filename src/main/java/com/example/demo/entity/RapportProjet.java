@@ -2,10 +2,18 @@ package com.example.demo.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.example.demo.util.EfficaciteEnum;
+import com.example.demo.util.TypeConstatEnum;
 
 @Entity
 public class RapportProjet {
@@ -14,16 +22,20 @@ public class RapportProjet {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 	
+    private String activite;
+
     @Column(length = 1024)
-    private String contexte;
-    @Column(length = 1024)
-    private String force;
-    @Column(length = 1024)
-    private String risque;
-    @Column(length = 1024)
-    private String amelioration;
-    @Column(length = 1024)
-    private String conclusion;
+    private String commentaire;
+    
+    @Enumerated(EnumType.STRING)
+    private TypeConstatEnum typeConstat;
+    
+    @OnDelete(action=OnDeleteAction.CASCADE)
+    @ManyToOne
+    private Exigence exigence;
+   
+    private String libelle;
+
     
     
     @ManyToOne
@@ -45,54 +57,7 @@ public class RapportProjet {
 	}
 
 
-	public String getContexte() {
-		return contexte;
-	}
-
-
-	public void setContexte(String contexte) {
-		this.contexte = contexte;
-	}
-
-
-	public String getForce() {
-		return force;
-	}
-
-
-	public void setForce(String force) {
-		this.force = force;
-	}
-
-
-	public String getRisque() {
-		return risque;
-	}
-
-
-	public void setRisque(String risque) {
-		this.risque = risque;
-	}
-
-
-	public String getAmelioration() {
-		return amelioration;
-	}
-
-
-	public void setAmelioration(String amélioration) {
-		this.amelioration = amélioration;
-	}
-
-
-	public String getConclusion() {
-		return conclusion;
-	}
-
-
-	public void setConclusion(String conclusion) {
-		this.conclusion = conclusion;
-	}
+	
 
 
 	public PlanningProjet getPlanningProjet() {
@@ -102,6 +67,56 @@ public class RapportProjet {
 
 	public void setPlanningProjet(PlanningProjet planningProjet) {
 		this.planningProjet = planningProjet;
+	}
+
+
+	public String getActivite() {
+		return activite;
+	}
+
+
+	public void setActivite(String activite) {
+		this.activite = activite;
+	}
+
+
+	public String getCommentaire() {
+		return commentaire;
+	}
+
+
+	public void setCommentaire(String commentaire) {
+		this.commentaire = commentaire;
+	}
+
+
+	public TypeConstatEnum getTypeConstat() {
+		return typeConstat;
+	}
+
+
+	public void setTypeConstat(TypeConstatEnum typeConstat) {
+		this.typeConstat = typeConstat;
+	}
+
+
+	public Exigence getExigence() {
+		return exigence;
+	}
+
+
+	public void setExigence(Exigence exigence) {
+		this.exigence = exigence;
+	}
+
+
+	public String getLibelle() {
+		return libelle;
+	}
+
+
+	public void setLibelle(String libelle) {
+		this.libelle = libelle;
 	}
 
 

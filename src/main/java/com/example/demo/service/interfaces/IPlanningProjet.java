@@ -9,5 +9,5 @@ public interface IPlanningProjet {
 
 	List<PlanningProjet> getAllPlanifie();
 	List<PlanningProjet> getAllRealise();
-
+	PlanningProjet getPlanningByNumPlanning(Long num);
 }

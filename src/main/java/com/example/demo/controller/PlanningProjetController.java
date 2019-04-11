@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.entity.PlanningProjet;
 import com.example.demo.entity.PlanningProjetPk;
 import com.example.demo.entity.Projet;
+import com.example.demo.entity.RapportProjet;
 import com.example.demo.respository.ProjetRepository;
 import com.example.demo.service.PlanningProjetService;
 import com.example.demo.service.ProjetService;
@@ -109,6 +111,13 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 		planningProjetService.add(planningProjet);
 
 		return new ResponseEntity<>(HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/details/{numPlanning}", method = RequestMethod.GET)
+	public PlanningProjet getPlanningByNumPlanning(@PathVariable Long numPlanning) {
+
+		return planningProjetService.getPlanningByNumPlanning(numPlanning);
+
 	}
 
 }

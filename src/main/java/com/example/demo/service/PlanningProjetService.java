@@ -20,7 +20,11 @@ public class PlanningProjetService implements ICrudService<PlanningProjet, Long>
 	public List<PlanningProjet> getAll() {
 		return planningProjetRepository.findAll();
 	}
-
+	
+	@Override
+	public PlanningProjet getPlanningByNumPlanning(Long num) {
+		return planningProjetRepository.findByNumPlanning(num);
+	}
 	@Override
 	public void add(PlanningProjet entity) {
 		planningProjetRepository.save(entity)	;	

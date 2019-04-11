@@ -1,5 +1,7 @@
 package com.example.demo.respository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.demo.entity.RapportProjet;
@@ -7,5 +9,6 @@ import com.example.demo.entity.RapportProjet;
 
 public interface RapportProjetRepository  extends JpaRepository<RapportProjet, Long>{
 
-	RapportProjet findByPlanningProjetNumPlanning(Long num);
+	List<RapportProjet> findByPlanningProjetNumPlanning(Long num);
+
 }

@@ -22,6 +22,8 @@ public class RapportProjet {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 	
+	
+    @Column(length = 1024)
     private String activite;
 
     @Column(length = 1024)
@@ -34,6 +36,7 @@ public class RapportProjet {
     @ManyToOne
     private Exigence exigence;
    
+    @Column(length = 1024)
     private String libelle;
 
     

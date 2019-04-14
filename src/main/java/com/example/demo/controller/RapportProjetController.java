@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Exigence;
 import com.example.demo.entity.PlanningProjet;
+import com.example.demo.entity.PlanningProjetPk;
 import com.example.demo.entity.RapportProjet;
 import com.example.demo.respository.ExigenceRepository;
 import com.example.demo.respository.PlanningProjetRepository;
@@ -34,29 +35,33 @@ public class RapportProjetController extends CrudController<RapportProjet, Long>
 	
 	@Autowired
 	RapportProjetRepository rapportProjetReposistory;
+	
+	@Autowired
 	PlanningProjetRepository planningProjetRepository;
+	
 	@Autowired
 	ExigenceRepository exigenceRepository;
 
 	@RequestMapping(value = "/Add/{numPlanning}", method = RequestMethod.POST)
-	public ResponseEntity addPlanningProjet(@RequestBody HashMap<String, Object> mapper,
-			@PathVariable Long numPlanning) {
+	public ResponseEntity addPlanningProjet(@RequestBody HashMap<String, Object> mapper, @PathVariable Long numPlanning) {
 		Long id = Long.parseLong((String) mapper.get("exigence"));
 
 		String commentaire = ((String) mapper.get("commentaire"));
 		String libelle = ((String) mapper.get("libelle"));
 		String typeConstat = ((String) mapper.get("typeConstat"));
 		String activite = ((String) mapper.get("activite"));
+		PlanningProjet planning = planningProjetRepository.findByNumPlanning(numPlanning);
 
 		Exigence exigence = exigenceRepository.getOne(id);
-		PlanningProjet planning = planningProjetRepository.findByNumPlanning(numPlanning);
-		//planning.setEtat(true);
+		
+
 		RapportProjet rapport = new RapportProjet();
+		rapport.setPlanningProjet(planning);
+
 		rapport.setActivite(activite);
 		rapport.setCommentaire(commentaire);
 		rapport.setLibelle(libelle);
 		rapport.setTypeConstat(TypeConstatEnum.valueOf(typeConstat));
-		rapport.setPlanningProjet(planning);
 		rapport.setExigence(exigence);
 		rapportProjetService.add(rapport);
 
@@ -65,16 +70,16 @@ public class RapportProjetController extends CrudController<RapportProjet, Long>
 	}
 
 	@RequestMapping(value = "/Update/{id}", method = RequestMethod.PUT)
-	public ResponseEntity updatePlanningProjet(@RequestBody HashMap<String, Object> mapper,
-
-			@PathVariable Long id) {
+	public ResponseEntity updatePlanningProjet(@RequestBody HashMap<String, Object> mapper, @PathVariable Long id) {
 		
 		
 		Long ide = Long.parseLong((String) mapper.get("exigence"));
+		String typeConstat = ((String) mapper.get("typeConstat"));
 
+		
+		//System.out.println(x);
 		String commentaire = ((String) mapper.get("commentaire"));
 		String libelle = ((String) mapper.get("libelle"));
-		String typeConstat = ((String) mapper.get("typeConstat"));
 		String activite = ((String) mapper.get("activite"));
 
 		Exigence exigence = exigenceRepository.getOne(ide);

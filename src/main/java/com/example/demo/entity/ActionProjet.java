@@ -50,7 +50,7 @@ public class ActionProjet {
     private EfficaciteEnum efficacite;
 	
     @ManyToOne
-    private PlanningProjet planningProjet;
+    private RapportProjet rapportProjet;
     
     @ManyToOne
     private Source source;
@@ -79,14 +79,7 @@ public class ActionProjet {
 	}
 
 
-	public PlanningProjet getPlanningProjet() {
-		return planningProjet;
-	}
-
-
-	public void setPlanningProjet(PlanningProjet planningProjet) {
-		this.planningProjet = planningProjet;
-	}
+	
 
 
 	public ActionProjet() {
@@ -222,6 +215,16 @@ public class ActionProjet {
 
 	public void setEnJeux(EnJeux enJeux) {
 		this.enJeux = enJeux;
+	}
+
+
+	public RapportProjet getRapportProjet() {
+		return rapportProjet;
+	}
+
+
+	public void setRapportProjet(RapportProjet rapportProjet) {
+		this.rapportProjet = rapportProjet;
 	}
 
 

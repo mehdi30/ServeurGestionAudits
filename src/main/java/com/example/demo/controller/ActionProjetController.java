@@ -15,13 +15,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.ActionProjet;
+import com.example.demo.entity.EnJeux;
 import com.example.demo.entity.PlanningProjet;
 import com.example.demo.entity.RapportProjet;
+import com.example.demo.entity.Source;
 import com.example.demo.respository.ActionProjetRepository;
+import com.example.demo.respository.EnjeuxRepository;
 import com.example.demo.respository.PlanningProjetRepository;
+import com.example.demo.respository.RapportProjetRepository;
+import com.example.demo.respository.SourceRepository;
 import com.example.demo.service.ActionProjetService;
 import com.example.demo.util.EfficaciteEnum;
+import com.example.demo.util.RessourceEnum;
 import com.example.demo.util.StatusEnum;
+import com.example.demo.util.TypeActionEnum;
 
 @RestController
 @RequestMapping("/crud_action_projet")
@@ -35,18 +42,65 @@ public class ActionProjetController extends CrudController<ActionProjet, Long> {
 	PlanningProjetRepository planningProjetRepository;
 
 	@Autowired
+	RapportProjetRepository rapportProjetRepository;
+	
+	@Autowired
+	EnjeuxRepository enJeuxRepository;
+	
+	@Autowired
+	SourceRepository  sourceRepository;
+	
+	@Autowired
 	ActionProjetRepository actionProjetRepository;
 
-	@RequestMapping(value = "/AAP/{numPlanning}", method = RequestMethod.POST)
-	public ResponseEntity addActionProjet(@RequestBody ActionProjet action, @PathVariable Long numPlanning) {
+	@RequestMapping(value = "/AAS", method = RequestMethod.POST)
+	public ResponseEntity addActionProjets(@RequestBody HashMap<String, Object> mapper) {
 
-		PlanningProjet planning = planningProjetRepository.findByNumPlanning(numPlanning);
-		// RapportProjet rapport = new RapportProjet();
-		// rapport.setContexte(contexte);
-		// planning.setEtat(true);
-		action.setPlanningProjet(planning);
+		//PlanningProjet planning = planningProjetRepository.findByNumPlanning(numPlanning);
+		Long ide = Long.parseLong((String) mapper.get("enJeux"));
+		String typeAction = ((String) mapper.get("typeAction"));
+		String ressource = ((String) mapper.get("ressource"));
+		String actiona = ((String) mapper.get("action"));
+		Long ids = Long.parseLong((String) mapper.get("source"));
+
+		LocalDate delai = LocalDate.parse((String)mapper.get("delai"));
+
+        EnJeux enjeux = enJeuxRepository.getOne(ide);
+        Source source = sourceRepository.getOne(ids);
+
+        ActionProjet action = new ActionProjet();
+        action.setSource(source);
+        action.setEnJeux(enjeux);
+		action.setAction(actiona);
+		action.setDelai(delai);
+		action.setRessource(RessourceEnum.valueOf(ressource));
+		action.setTypeAction(TypeActionEnum.valueOf(typeAction));
 		action.setStatus(StatusEnum.Planifiée);
-		//action.setEfficacite(EfficaciteEnum.NonEfficace);
+		actionProjetService.add(action);
+
+		return new ResponseEntity<>(HttpStatus.OK);
+
+	}
+	@RequestMapping(value = "/AAP/{id}", method = RequestMethod.POST)
+	public ResponseEntity addActionProjet(@RequestBody HashMap<String, Object> mapper, @PathVariable Long id) {
+
+		//PlanningProjet planning = planningProjetRepository.findByNumPlanning(numPlanning);
+		Long ide = Long.parseLong((String) mapper.get("enJeux"));
+		String typeAction = ((String) mapper.get("typeAction"));
+		String ressource = ((String) mapper.get("ressource"));
+		String actiona = ((String) mapper.get("action"));
+		LocalDate delai = LocalDate.parse((String)mapper.get("delai"));
+
+		RapportProjet rapport = rapportProjetRepository.getOne(id);
+        EnJeux enjeux = enJeuxRepository.getOne(ide);
+        ActionProjet action = new ActionProjet();
+        action.setEnJeux(enjeux);
+		action.setRapportProjet(rapport);
+		action.setAction(actiona);
+		action.setDelai(delai);
+		action.setRessource(RessourceEnum.valueOf(ressource));
+		action.setTypeAction(TypeActionEnum.valueOf(typeAction));
+		action.setStatus(StatusEnum.Planifiée);
 		actionProjetService.add(action);
 
 		return new ResponseEntity<>(HttpStatus.OK);
@@ -79,8 +133,10 @@ public class ActionProjetController extends CrudController<ActionProjet, Long> {
 	public void validerActionProjet(@RequestBody ActionProjet action, @PathVariable Long id) {
 		
 
+		//if()
+		//action.setEfficacite(null);
+		//action.setEfficacite(null);
 
-		
 		actionProjetService.updateActionProjet(id, action);
 
 	}

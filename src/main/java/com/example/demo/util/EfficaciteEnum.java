@@ -4,8 +4,8 @@ public enum EfficaciteEnum {
 	
 	Efficace ("Efficace"),
 	Moyennement ("Moyennement Efficace"),
-	NonEfficace ("Non Efficace");
-	
+	NonEfficace ("Non Efficace"),
+	Vide ("Vide");
 
 	private String name;
 	

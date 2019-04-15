@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 
@@ -32,19 +33,21 @@ public class RapportProjetController extends CrudController<RapportProjet, Long>
 
 	@Autowired
 	RapportProjetService rapportProjetService;
-	
+
 	@Autowired
 	RapportProjetRepository rapportProjetReposistory;
-	
+
 	@Autowired
 	PlanningProjetRepository planningProjetRepository;
-	
+
 	@Autowired
 	ExigenceRepository exigenceRepository;
 
 	@RequestMapping(value = "/Add/{numPlanning}", method = RequestMethod.POST)
-	public ResponseEntity addPlanningProjet(@RequestBody HashMap<String, Object> mapper, @PathVariable Long numPlanning) {
+	public ResponseEntity addPlanningProjet(@RequestBody HashMap<String, Object> mapper,
+			@PathVariable Long numPlanning) {
 		Long id = Long.parseLong((String) mapper.get("exigence"));
+		LocalDateTime currentDate = LocalDateTime.now();
 
 		String commentaire = ((String) mapper.get("commentaire"));
 		String libelle = ((String) mapper.get("libelle"));
@@ -53,11 +56,10 @@ public class RapportProjetController extends CrudController<RapportProjet, Long>
 		PlanningProjet planning = planningProjetRepository.findByNumPlanning(numPlanning);
 
 		Exigence exigence = exigenceRepository.getOne(id);
-		
 
 		RapportProjet rapport = new RapportProjet();
 		rapport.setPlanningProjet(planning);
-
+		rapport.setMaj(currentDate);
 		rapport.setActivite(activite);
 		rapport.setCommentaire(commentaire);
 		rapport.setLibelle(libelle);
@@ -71,13 +73,13 @@ public class RapportProjetController extends CrudController<RapportProjet, Long>
 
 	@RequestMapping(value = "/Update/{id}", method = RequestMethod.PUT)
 	public ResponseEntity updatePlanningProjet(@RequestBody HashMap<String, Object> mapper, @PathVariable Long id) {
-		
-		
+
 		Long ide = Long.parseLong((String) mapper.get("exigence"));
 		String typeConstat = ((String) mapper.get("typeConstat"));
 
-		
-		//System.out.println(x);
+		LocalDateTime currentDate = LocalDateTime.now();
+
+		// System.out.println(x);
 		String commentaire = ((String) mapper.get("commentaire"));
 		String libelle = ((String) mapper.get("libelle"));
 		String activite = ((String) mapper.get("activite"));
@@ -86,6 +88,8 @@ public class RapportProjetController extends CrudController<RapportProjet, Long>
 		RapportProjet rapport = rapportProjetReposistory.getOne(id);
 		rapport.setActivite(activite);
 		rapport.setCommentaire(commentaire);
+		rapport.setMaj(currentDate);
+
 		rapport.setLibelle(libelle);
 		rapport.setTypeConstat(TypeConstatEnum.valueOf(typeConstat));
 		rapport.setExigence(exigence);

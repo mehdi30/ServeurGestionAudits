@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -39,7 +41,8 @@ public class RapportProjet {
     @Column(length = 1024)
     private String libelle;
 
-    
+	private LocalDateTime maj;
+
     
     @ManyToOne
     private PlanningProjet planningProjet;
@@ -120,6 +123,16 @@ public class RapportProjet {
 
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
+	}
+
+
+	public LocalDateTime getMaj() {
+		return maj;
+	}
+
+
+	public void setMaj(LocalDateTime maj) {
+		this.maj = maj;
 	}
 
 

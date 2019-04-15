@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,9 +28,11 @@ public class ActionProjet {
     private String contexte;
     @Column(length = 1024)
     private String action;
-	private LocalDate delai;
-	private LocalDate dateEvaluation;
-	private LocalDate dateRealisation;
+	private LocalDateTime delai;
+	private LocalDateTime dateEvaluation;
+	private LocalDateTime dateRealisation;
+	private LocalDateTime dateLancement;
+
     @Column(length = 1024)
     private String methode;
     @Column(length = 1024)
@@ -51,6 +54,10 @@ public class ActionProjet {
 	
     @ManyToOne
     private RapportProjet rapportProjet;
+    
+    @ManyToOne
+    private User responsable;
+    
     
     @ManyToOne
     private Source source;
@@ -138,32 +145,32 @@ public class ActionProjet {
 	}
 
 
-	public LocalDate getDelai() {
+	public LocalDateTime getDelai() {
 		return delai;
 	}
 
 
-	public void setDelai(LocalDate delai) {
+	public void setDelai(LocalDateTime delai) {
 		this.delai = delai;
 	}
 
 
-	public LocalDate getDateEvaluation() {
+	public LocalDateTime getDateEvaluation() {
 		return dateEvaluation;
 	}
 
 
-	public void setDateEvaluation(LocalDate dateEvaluation) {
+	public void setDateEvaluation(LocalDateTime dateEvaluation) {
 		this.dateEvaluation = dateEvaluation;
 	}
 
 
-	public LocalDate getDateRealisation() {
+	public LocalDateTime getDateRealisation() {
 		return dateRealisation;
 	}
 
 
-	public void setDateRealisation(LocalDate dateRealisation) {
+	public void setDateRealisation(LocalDateTime dateRealisation) {
 		this.dateRealisation = dateRealisation;
 	}
 
@@ -225,6 +232,26 @@ public class ActionProjet {
 
 	public void setRapportProjet(RapportProjet rapportProjet) {
 		this.rapportProjet = rapportProjet;
+	}
+
+
+	public User getResponsable() {
+		return responsable;
+	}
+
+
+	public void setResponsable(User responsable) {
+		this.responsable = responsable;
+	}
+
+
+	public LocalDateTime getDateLancement() {
+		return dateLancement;
+	}
+
+
+	public void setDateLancement(LocalDateTime dateLancement) {
+		this.dateLancement = dateLancement;
 	}
 
 

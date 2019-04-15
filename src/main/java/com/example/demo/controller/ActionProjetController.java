@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 
@@ -19,11 +21,13 @@ import com.example.demo.entity.EnJeux;
 import com.example.demo.entity.PlanningProjet;
 import com.example.demo.entity.RapportProjet;
 import com.example.demo.entity.Source;
+import com.example.demo.entity.User;
 import com.example.demo.respository.ActionProjetRepository;
 import com.example.demo.respository.EnjeuxRepository;
 import com.example.demo.respository.PlanningProjetRepository;
 import com.example.demo.respository.RapportProjetRepository;
 import com.example.demo.respository.SourceRepository;
+import com.example.demo.respository.UserRepository;
 import com.example.demo.service.ActionProjetService;
 import com.example.demo.util.EfficaciteEnum;
 import com.example.demo.util.RessourceEnum;
@@ -51,6 +55,9 @@ public class ActionProjetController extends CrudController<ActionProjet, Long> {
 	SourceRepository  sourceRepository;
 	
 	@Autowired
+	UserRepository  userRepository;
+	
+	@Autowired
 	ActionProjetRepository actionProjetRepository;
 
 	@RequestMapping(value = "/AAS", method = RequestMethod.POST)
@@ -58,20 +65,27 @@ public class ActionProjetController extends CrudController<ActionProjet, Long> {
 
 		//PlanningProjet planning = planningProjetRepository.findByNumPlanning(numPlanning);
 		Long ide = Long.parseLong((String) mapper.get("enJeux"));
+		Long idr = Long.parseLong((String) mapper.get("responsable"));
+
 		String typeAction = ((String) mapper.get("typeAction"));
 		String ressource = ((String) mapper.get("ressource"));
 		String actiona = ((String) mapper.get("action"));
 		Long ids = Long.parseLong((String) mapper.get("source"));
+		LocalDateTime dlancement = LocalDateTime.now();
 
-		LocalDate delai = LocalDate.parse((String)mapper.get("delai"));
+		//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'hh:mm");
+
+		LocalDateTime delai = LocalDateTime.parse((String)mapper.get("delai"));
 
         EnJeux enjeux = enJeuxRepository.getOne(ide);
         Source source = sourceRepository.getOne(ids);
-
+               User responsable =   userRepository.getOne(idr);
         ActionProjet action = new ActionProjet();
+        action.setDateLancement(dlancement);
         action.setSource(source);
         action.setEnJeux(enjeux);
 		action.setAction(actiona);
+		action.setResponsable(responsable);
 		action.setDelai(delai);
 		action.setRessource(RessourceEnum.valueOf(ressource));
 		action.setTypeAction(TypeActionEnum.valueOf(typeAction));
@@ -89,15 +103,21 @@ public class ActionProjetController extends CrudController<ActionProjet, Long> {
 		String typeAction = ((String) mapper.get("typeAction"));
 		String ressource = ((String) mapper.get("ressource"));
 		String actiona = ((String) mapper.get("action"));
-		LocalDate delai = LocalDate.parse((String)mapper.get("delai"));
+		LocalDateTime delai = LocalDateTime.parse((String)mapper.get("delai"));
+		LocalDateTime dlancement = LocalDateTime.now();
+
+		Long idr = Long.parseLong((String) mapper.get("responsable"));
+        User responsable =   userRepository.getOne(idr);
 
 		RapportProjet rapport = rapportProjetRepository.getOne(id);
         EnJeux enjeux = enJeuxRepository.getOne(ide);
         ActionProjet action = new ActionProjet();
+        action.setDateLancement(dlancement);
         action.setEnJeux(enjeux);
 		action.setRapportProjet(rapport);
 		action.setAction(actiona);
 		action.setDelai(delai);
+		action.setResponsable(responsable);
 		action.setRessource(RessourceEnum.valueOf(ressource));
 		action.setTypeAction(TypeActionEnum.valueOf(typeAction));
 		action.setStatus(StatusEnum.Planifiée);

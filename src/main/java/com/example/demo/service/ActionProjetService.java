@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,8 @@ public class ActionProjetService implements  ICrudService<ActionProjet, Long>,IA
 				obj.setStatus(c.getStatus());
 				obj.setEfficacite(c.getEfficacite());
 				obj.setNumero(c.getNumero());
-				LocalDate currentDate = LocalDate.now();
+				obj.setDateEvaluation(c.getDateEvaluation()); 
+				LocalDateTime currentDate = LocalDateTime.now();
                  
                    obj.setDateRealisation(currentDate);
 

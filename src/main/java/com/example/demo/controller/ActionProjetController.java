@@ -65,31 +65,32 @@ public class ActionProjetController extends CrudController<ActionProjet, Long> {
 
 		//PlanningProjet planning = planningProjetRepository.findByNumPlanning(numPlanning);
 		Long ide = Long.parseLong((String) mapper.get("enJeux"));
-		Long idr = Long.parseLong((String) mapper.get("responsable"));
+		//Long idr = Long.parseLong((String) mapper.get("responsable"));
 
-		String typeAction = ((String) mapper.get("typeAction"));
-		String ressource = ((String) mapper.get("ressource"));
-		String actiona = ((String) mapper.get("action"));
+		//String typeAction = ((String) mapper.get("typeAction"));
+		//String ressource = ((String) mapper.get("ressource"));
+		String cause = ((String) mapper.get("cause"));
 		Long ids = Long.parseLong((String) mapper.get("source"));
 		LocalDateTime dlancement = LocalDateTime.now();
 
 		//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'hh:mm");
 
-		LocalDateTime delai = LocalDateTime.parse((String)mapper.get("delai"));
+		//LocalDateTime delai = LocalDateTime.parse((String)mapper.get("delai"));
 
         EnJeux enjeux = enJeuxRepository.getOne(ide);
         Source source = sourceRepository.getOne(ids);
-               User responsable =   userRepository.getOne(idr);
+            //   User responsable =   userRepository.getOne(idr);
         ActionProjet action = new ActionProjet();
         action.setDateLancement(dlancement);
         action.setSource(source);
         action.setEnJeux(enjeux);
-		action.setAction(actiona);
+        action.setCause(cause);
+	/*	action.setAction(actiona);
 		action.setResponsable(responsable);
 		action.setDelai(delai);
 		action.setRessource(RessourceEnum.valueOf(ressource));
 		action.setTypeAction(TypeActionEnum.valueOf(typeAction));
-		action.setStatus(StatusEnum.Planifiée);
+		action.setStatus(StatusEnum.Planifiée);*/
 		actionProjetService.add(action);
 
 		return new ResponseEntity<>(HttpStatus.OK);
@@ -115,12 +116,12 @@ public class ActionProjetController extends CrudController<ActionProjet, Long> {
         action.setDateLancement(dlancement);
         action.setEnJeux(enjeux);
 		action.setRapportProjet(rapport);
-		action.setAction(actiona);
+		/*action.setAction(actiona);
 		action.setDelai(delai);
 		action.setResponsable(responsable);
 		action.setRessource(RessourceEnum.valueOf(ressource));
 		action.setTypeAction(TypeActionEnum.valueOf(typeAction));
-		action.setStatus(StatusEnum.Planifiée);
+		action.setStatus(StatusEnum.Planifiée);*/
 		actionProjetService.add(action);
 
 		return new ResponseEntity<>(HttpStatus.OK);
@@ -161,10 +162,10 @@ public class ActionProjetController extends CrudController<ActionProjet, Long> {
 
 	}
 
-	@RequestMapping(value = "/planifiee/{status}", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/planifiee/{status}", method = RequestMethod.GET)
 	public List<ActionProjet> getByStatus(@PathVariable StatusEnum status) {
 
 		return actionProjetService.getByStatus(status);
 
-	}
+	}*/
 }

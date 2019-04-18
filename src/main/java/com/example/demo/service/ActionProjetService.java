@@ -9,7 +9,9 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.ActionProjet;
+import com.example.demo.entity.SousAction;
 import com.example.demo.respository.ActionProjetRepository;
+import com.example.demo.respository.SousActionRepository;
 import com.example.demo.service.interfaces.IActionProjet;
 import com.example.demo.util.StatusEnum;
 
@@ -20,6 +22,8 @@ public class ActionProjetService implements  ICrudService<ActionProjet, Long>,IA
 	@Autowired
 	ActionProjetRepository actionProjetRepository;
 	
+	@Autowired
+	SousActionRepository sousActionProjetRepository;
 	@Override
 	public void updateActionProjet(Long id, ActionProjet c) {
 		// TODO Auto-generated method stub
@@ -27,15 +31,16 @@ public class ActionProjetService implements  ICrudService<ActionProjet, Long>,IA
 			ActionProjet a = actionProjetRepository.getOne(id);
 			if(a!= null) {
 				ActionProjet obj = a;
-				obj.setMethode(c.getMethode());
-				obj.setCommentaire(c.getCommentaire());
-				obj.setStatus(c.getStatus());
-				obj.setEfficacite(c.getEfficacite());
-				obj.setNumero(c.getNumero());
-				obj.setDateEvaluation(c.getDateEvaluation()); 
+				//obj.setMethode(c.getMethode());
+				//obj.setCommentaire(c.getCommentaire());
+				//.setStatus(c.getStatus());
+				//obj.setEfficacite(c.getEfficacite());
+				//obj.setNumero(c.getNumero());
+				//obj.setDateEvaluation(c.getDateEvaluation()); 
+				//SousAction s = new SousAction();
 				LocalDateTime currentDate = LocalDateTime.now();
-                 
-                   obj.setDateRealisation(currentDate);
+              //   obj.s
+                  // obj.setDateRealisation(currentDate);
 
 				actionProjetRepository.save(obj);
 			}
@@ -43,9 +48,9 @@ public class ActionProjetService implements  ICrudService<ActionProjet, Long>,IA
 			//logger.error(e.getMessage());
 		}
 	}
-	public List<ActionProjet> getByStatus(StatusEnum status){
+	/*public List<ActionProjet> getByStatus(StatusEnum status){
 		return actionProjetRepository.findByStatus(status);
-	}
+	}*/
 	@Override
 	public List<ActionProjet> getAll() {
 		return actionProjetRepository.findAll();

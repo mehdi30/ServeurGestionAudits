@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 
@@ -50,7 +51,7 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 
 		Long idAudit = Long.parseLong((String) mapper.get("audit"));
 		Long idAuditeur = Long.parseLong((String) mapper.get("user"));
-		LocalDate datePlan = LocalDate.parse((String) mapper.get("datePlan"));
+		LocalDateTime datePlan = LocalDateTime.parse((String) mapper.get("datePlan"));
 		Long idProjet = Long.parseLong((String) mapper.get("projet"));
 		String description = ((String) mapper.get("description"));
 		String typePlanning = ((String) mapper.get("typePlanning"));
@@ -85,7 +86,7 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 		String description = ((String) mapper.get("description"));
 
 		Long idAuditeur = Long.parseLong((String) mapper.get("user"));
-		LocalDate datePlan = LocalDate.parse((String) mapper.get("datePlan"));
+		LocalDateTime datePlan = LocalDateTime.parse((String) mapper.get("datePlan"));
 		String typePlanning = ((String) mapper.get("typePlanning"));
 
 		PlanningProjet planningProjet = new PlanningProjet();

@@ -10,6 +10,6 @@ import com.example.demo.util.StatusEnum;
 
 public interface ActionProjetRepository extends JpaRepository<ActionProjet, Long>{
 	
-	List<ActionProjet> findByStatus(StatusEnum status);
+	//List<ActionProjet> findByStatus(StatusEnum status);
 
 }

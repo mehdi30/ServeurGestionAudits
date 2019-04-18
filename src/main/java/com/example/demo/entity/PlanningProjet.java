@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
@@ -57,7 +58,7 @@ public class PlanningProjet implements Serializable {
 
 	private Long idDepartement;
 
-	private LocalDate datePlan;
+	private LocalDateTime datePlan;
 
 	private boolean etat = false;
 	
@@ -161,11 +162,11 @@ public class PlanningProjet implements Serializable {
 		this.idProjet = idProjet;
 	}*/
 
-	public LocalDate getDatePlan() {
+	public LocalDateTime getDatePlan() {
 		return datePlan;
 	}
 
-	public void setDatePlan(LocalDate datePlan) {
+	public void setDatePlan(LocalDateTime datePlan) {
 		this.datePlan = datePlan;
 	}
 

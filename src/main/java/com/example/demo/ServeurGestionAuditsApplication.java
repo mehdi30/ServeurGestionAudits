@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import java.util.Arrays;
+import java.util.List;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,18 +9,22 @@ import org.springframework.boot.autoconfigure.web.ConditionalOnEnabledResourceCh
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.entity.ActionProjet;
 import com.example.demo.entity.Audit;
 import com.example.demo.entity.Departement;
 import com.example.demo.entity.PlanningProjet;
 import com.example.demo.entity.PlanningProjetPk;
 import com.example.demo.entity.Projet;
 import com.example.demo.entity.Role;
+import com.example.demo.entity.SousAction;
 import com.example.demo.entity.User;
+import com.example.demo.respository.ActionProjetRepository;
 import com.example.demo.respository.AuditRepository;
 import com.example.demo.respository.DepartementRepository;
 import com.example.demo.respository.PlanningProjetRepository;
 import com.example.demo.respository.ProjetRepository;
 import com.example.demo.respository.RoleRepository;
+import com.example.demo.respository.SousActionRepository;
 import com.example.demo.respository.UserRepository;
 import com.example.demo.util.ProcessusEnum;
 import com.example.demo.util.RoleEnum;
@@ -32,9 +37,29 @@ public class ServeurGestionAuditsApplication {
 		ConfigurableApplicationContext ctx = SpringApplication.run(ServeurGestionAuditsApplication.class, args);
 
 	
-	/*
-	
-	
+
+		/*ActionProjetRepository actionr = ctx.getBean(ActionProjetRepository.class);
+		SousActionRepository sactionr = ctx.getBean(SousActionRepository.class);
+		SousAction saction = new SousAction();
+		saction.setAction("haha");
+		sactionr.save(saction);
+
+		SousAction saction2 = new SousAction();
+		saction2.setAction("tddd!!");
+		sactionr.save(saction2);
+		
+		List<ActionProjet> actions = actionr.findAll();
+		actions.forEach(action -> action.setSousActions(Arrays.asList(saction)));
+		actions.forEach(action2 -> action2.setSousActions(Arrays.asList(saction2)));
+
+		actions.forEach(action -> actionr.save(action));
+
+		
+		
+		//action.setSousActions(Arrays.asList(saction));
+		
+		
+		
 	DepartementRepository departementRepository = ctx.getBean(DepartementRepository.class);
 	
 	departementRepository.save(new Departement(ProcessusEnum.Technique,"lac 2"));

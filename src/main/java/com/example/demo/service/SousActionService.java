@@ -67,8 +67,9 @@ public class SousActionService implements ICrudService<SousAction, Long>{
 
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
-		
+         SousAction s = new SousAction();
+         s.setId(id);
+         sousActionRepository.delete(s);
 	}
 
 }

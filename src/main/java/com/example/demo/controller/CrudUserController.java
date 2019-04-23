@@ -55,9 +55,15 @@ public class CrudUserController extends CrudController<User, Long>{
 		super.add(user);
 	}
 	
-	  @RequestMapping(value = "/departement/{depId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	  @RequestMapping(value = "/departement/{depId}", method = RequestMethod.GET)
 	    public List<User> getDepartement(@PathVariable("depId") Long depId) {
 	    	return userService.getAllUserByDepartement(depId);
+	       
+	    }
+	  
+	  @RequestMapping(value = "/projet/{id}", method = RequestMethod.GET)
+	    public User getByProjet(@PathVariable("id") Long id) {
+	    	return userService.getByIdprojet(id);
 	       
 	    }
 }

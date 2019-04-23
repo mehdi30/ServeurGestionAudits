@@ -11,6 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.example.demo.util.EfficaciteEnum;
 import com.example.demo.util.RessourceEnum;
 import com.example.demo.util.StatusEnum;
@@ -23,6 +26,7 @@ public class SousAction {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+    @OnDelete(action=OnDeleteAction.CASCADE)
 	@Column(name = "ACTIONPROJET_ID")
 	private Integer actionProjetId;
 
@@ -48,7 +52,8 @@ public class SousAction {
 
 	@Enumerated(EnumType.STRING)
 	private EfficaciteEnum efficacite;
-
+	
+    @OnDelete(action=OnDeleteAction.CASCADE)
 	@ManyToOne
 	private User responsable;
 

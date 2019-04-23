@@ -13,5 +13,5 @@ public interface UserRepository extends JpaRepository<User, Long>{
 
 	User findByUsername(String str);
     List<User> findByDepartement(Departement departement);
-    
+    User findByProjetsId(Long id);
 }

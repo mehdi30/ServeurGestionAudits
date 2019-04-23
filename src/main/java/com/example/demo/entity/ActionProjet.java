@@ -34,6 +34,9 @@ public class ActionProjet {
 
 	@ManyToOne
 	private RapportProjet rapportProjet;
+	
+	@ManyToOne
+	private Departement departement;
 
 	@ManyToOne
 	private Source source;
@@ -104,6 +107,14 @@ public class ActionProjet {
 
 	public void setCause(String cause) {
 		this.cause = cause;
+	}
+
+	public Departement getDepartement() {
+		return departement;
+	}
+
+	public void setDepartement(Departement departement) {
+		this.departement = departement;
 	}
 	
 	

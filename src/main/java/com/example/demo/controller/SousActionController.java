@@ -22,7 +22,9 @@ import com.example.demo.respository.UserRepository;
 import com.example.demo.service.ActionProjetService;
 import com.example.demo.service.SousActionService;
 import com.example.demo.util.EfficaciteEnum;
+import com.example.demo.util.RessourceEnum;
 import com.example.demo.util.StatusEnum;
+import com.example.demo.util.TypeActionEnum;
 
 @RestController
 @RequestMapping("/crud_sousaction")
@@ -39,8 +41,20 @@ public class SousActionController extends CrudController<SousAction, Long>{
 	UserRepository userRepository;
 	
 	@RequestMapping(value = "/ASA/{id}", method = RequestMethod.POST)
-	public ResponseEntity addSousAction(@RequestBody SousAction sousAction, @PathVariable Integer id) {
+	public ResponseEntity addSousAction(@RequestBody HashMap<String, Object> mapper, @PathVariable Integer id) {
+		Integer idr = ((Integer) mapper.get("responsable"));
+
 		
+		String ressource = ((String) mapper.get("ressource"));
+		String typeAction = ((String) mapper.get("typeAction"));
+		String action = ((String) mapper.get("action"));
+
+		User respo = userRepository.getOne(idr.longValue());
+       SousAction sousAction = new SousAction();
+       sousAction.setTypeAction(TypeActionEnum.valueOf(typeAction));
+       sousAction.setRessource(RessourceEnum.valueOf(ressource));
+       sousAction.setAction(action);
+       sousAction.setResponsable(respo);
 		sousAction.setActionProjetId(id);
 		sActionService.add(sousAction);
 		return new ResponseEntity<>(HttpStatus.OK);

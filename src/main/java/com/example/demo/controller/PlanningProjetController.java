@@ -49,7 +49,6 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 	@RequestMapping(value = "/Add", method = RequestMethod.POST)
 	public ResponseEntity addPlanningProjet(@RequestBody HashMap<String, Object> mapper) {
 
-		Long idAudit = Long.parseLong((String) mapper.get("audit"));
 		Long idAuditeur = Long.parseLong((String) mapper.get("user"));
 		LocalDateTime datePlan = LocalDateTime.parse((String) mapper.get("datePlan"));
 		Long idProjet = Long.parseLong((String) mapper.get("projet"));
@@ -62,7 +61,6 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 		planningProjet.setIdAudite(projet.getManager().getId());
 		planningProjet.setIdProjet(idProjet);
 
-		planningProjet.setIdAudit(idAudit);
 		planningProjet.setDescription(description);
 		
 
@@ -80,7 +78,6 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 	@RequestMapping(value = "/AddD", method = RequestMethod.POST)
 	public ResponseEntity addPlanningDepartement(@RequestBody HashMap<String, Object> mapper) {
 
-		Long idAudit = Long.parseLong((String) mapper.get("audit"));
 		Long idDep = Long.parseLong((String) mapper.get("departement"));
 		Long idAudite = Long.parseLong((String) mapper.get("audite"));
 		String description = ((String) mapper.get("description"));
@@ -99,7 +96,6 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 		 * numPlanning.longValue();
 		 */
 
-		planningProjet.setIdAudit(idAudit);
 		planningProjet.setTypePlanning(TypePlanningEnum.valueOf(typePlanning));
 
 		planningProjet.setDescription(description);

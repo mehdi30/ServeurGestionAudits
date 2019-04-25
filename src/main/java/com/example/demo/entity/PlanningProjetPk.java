@@ -11,12 +11,9 @@ public class PlanningProjetPk implements Serializable{
 
 	private Long numPlanning;
 
-	private Long idAudit;
 	
 	private Long idAuditeur;
 	
-
-	//private Long idProjet;
 
 	public void setIdAuditeur(Long idAuditeur) {
 		this.idAuditeur = idAuditeur;
@@ -25,13 +22,7 @@ public class PlanningProjetPk implements Serializable{
 	public Long getNumPlanning() {
 		return numPlanning;
 	}
-	public Long getIdAudit() {
-		return idAudit;
-	}
-
-	public void setIdAudit(Long idAudit) {
-		this.idAudit = idAudit;
-	}
+	
 
 	public Long getIdAuditeur() {
 		return idAuditeur;

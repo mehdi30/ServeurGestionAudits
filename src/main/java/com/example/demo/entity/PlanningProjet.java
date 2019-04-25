@@ -34,18 +34,10 @@ public class PlanningProjet implements Serializable {
 	 * 
 	 */
 
-	@Id
-	private Long idAudit;
+	
 
 	@Id
 	private Long idAuditeur;
-
-	// @Id
-	// @Column(name = "ETAPA_ID", columnDefinition = "uuid")
-	// @Type(type = "org.hibernate.type.PostgresUUIDType")
-	// @GenericGenerator(name = "uuid2", strategy = "uuid2")
-	// @GeneratedValue(generator = "uuid2")
-	// private UUID id;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -68,9 +60,7 @@ public class PlanningProjet implements Serializable {
 	@Enumerated(EnumType.STRING)
     private TypePlanningEnum typePlanning;
 
-	@ManyToOne
-	@JoinColumn(name = "idAudit", referencedColumnName = "id", insertable = false, updatable = false)
-	private Audit audit;
+	
 
 	@ManyToOne // insertable=false,updatable=false c'est pas la responsabilite planning projet// d'ajouter ou màj l'auditeur
 	@JoinColumn(name = "idAuditeur", referencedColumnName = "id", insertable = false, updatable = false)
@@ -94,18 +84,11 @@ public class PlanningProjet implements Serializable {
 
 	public PlanningProjet(Audit audit, User auditeur) {
 		super();
-		this.audit = audit;
 		this.auditeur = auditeur;
 
 	}
 
-	public Audit getAudit() {
-		return audit;
-	}
-
-	public void setAudit(Audit audit) {
-		this.audit = audit;
-	}
+	
 
 	public User getAuditeur() {
 		return auditeur;
@@ -115,12 +98,7 @@ public class PlanningProjet implements Serializable {
 		this.auditeur = auditeur;
 	}
 
-	/*
-	 * public PlanningProjetPk getPlanningProjetPk() { return planningProjetPk; }
-	 * 
-	 * public void setPlanningProjetPk(PlanningProjetPk planningProjetPk) {
-	 * this.planningProjetPk = planningProjetPk; }
-	 */
+	
 
 	public Projet getProjet() {
 		return projet;
@@ -130,13 +108,7 @@ public class PlanningProjet implements Serializable {
 		this.projet = projet;
 	}
 
-	public Long getIdAudit() {
-		return idAudit;
-	}
-
-	public void setIdAudit(Long idAudit) {
-		this.idAudit = idAudit;
-	}
+	
 
 	public Long getIdAuditeur() {
 		return idAuditeur;

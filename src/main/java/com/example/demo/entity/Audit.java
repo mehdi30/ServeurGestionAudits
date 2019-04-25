@@ -15,47 +15,36 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Audit {
 
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Long id;
-    
-    @Column(length = 1024)
-    private String procedures;
-    
-    @JsonIgnore 
-    @OneToMany(mappedBy="audit",cascade = CascadeType.ALL)
-    private List<PlanningProjet> planningProjets;
-    
-    
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	@Column(length = 1024)
+	private String procedures;
+
 	public Long getId() {
 		return id;
 	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public List<PlanningProjet> getPlanningProjets() {
-		return planningProjets;
-	}
-	public void setPlanningProjets(List<PlanningProjet> planningProjets) {
-		this.planningProjets = planningProjets;
-	}
-	
+
 	public Audit() {
 		super();
 	}
+
 	public String getProcedures() {
 		return procedures;
 	}
+
 	public void setProcedures(String procedures) {
 		this.procedures = procedures;
 	}
-	
+
 	public Audit(String procedures) {
 		super();
 		this.procedures = procedures;
 	}
-	
-    
-    
+
 }

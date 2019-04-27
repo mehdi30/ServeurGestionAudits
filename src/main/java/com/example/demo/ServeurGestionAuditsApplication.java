@@ -58,11 +58,11 @@ public class ServeurGestionAuditsApplication {
 		
 		//action.setSousActions(Arrays.asList(saction));
 		*/
-		
 		/*
+		
 	DepartementRepository departementRepository = ctx.getBean(DepartementRepository.class);
-	
-	departementRepository.save(new Departement(ProcessusEnum.Technique,"lac 2"));
+	Departement d = new Departement(ProcessusEnum.Technique,"lac 2");
+	departementRepository.save(d);
 	departementRepository.save(new Departement(ProcessusEnum.Administrative, "pole"));
 
 	   
@@ -82,17 +82,21 @@ public class ServeurGestionAuditsApplication {
 		User user = new User("Hanen", "password1", true);
 		user.setLastname("Chakroun");
 		user.setRoles(Arrays.asList(roleUser));
-
+        user.setDepartement(d);
 		userRepository.save(user);
 		
 		User user1 = new User("Farah", "password1", true);
 		user1.setLastname("Krichen");
+        user1.setDepartement(d);
+
 		user1.setRoles(Arrays.asList(roleUser));
 
 		userRepository.save(user1);
 
 		User admin = new User("Mehdi", "password2", true);
 		admin.setLastname("Gaies");
+        admin.setDepartement(d);
+
 		admin.setRoles(Arrays.asList(roleUser, roleAdmin));
 		userRepository.save(admin);
 		

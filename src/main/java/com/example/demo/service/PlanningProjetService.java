@@ -37,9 +37,11 @@ public class PlanningProjetService implements ICrudService<PlanningProjet, Long>
 	}
 
 	@Override
-	public void delete(Long id) {
-		// TODO Auto-generated method stub
-		
+	public void delete(Long numPlanning) {
+
+		PlanningProjet plan = new PlanningProjet();
+		plan.setNumPlanning(numPlanning);
+		planningProjetRepository.delete(plan);
 	}
 
 	@Override

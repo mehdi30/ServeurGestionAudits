@@ -43,7 +43,7 @@ public class User {
 	
 	private boolean enable;
 	
-    @JsonIgnore 
+   // @JsonIgnore 
 	@ManyToMany(fetch=FetchType.EAGER)
 	@JoinTable(name="USERS_ROLES",
 	joinColumns={@JoinColumn(name="USER_ID")},
@@ -58,23 +58,7 @@ public class User {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "manager")
     private List<Projet> projets;  
 	
-    @JsonIgnore
-	@OneToMany(mappedBy="auditeur",cascade = CascadeType.ALL)
-    private List<PlanningProjet> planningProjets;
-    
-
-    @JsonIgnore
-	@OneToMany(mappedBy="audite",cascade = CascadeType.ALL)
-    private List<PlanningProjet> planningProjetsA;
- 
-	public List<PlanningProjet> getPlanningProjets() {
-		return planningProjets;
-	}
-
-	public void setPlanningProjets(List<PlanningProjet> planningProjets) {
-		this.planningProjets = planningProjets;
-	}
-
+	
 	public User(String username, String password, boolean enable) {
 		super();
 		this.username = username;
@@ -150,13 +134,7 @@ public class User {
 		this.lastname = lastname;
 	}
 
-	public List<PlanningProjet> getPlanningProjetsA() {
-		return planningProjetsA;
-	}
-
-	public void setPlanningProjetsA(List<PlanningProjet> planningProjetsA) {
-		this.planningProjetsA = planningProjetsA;
-	}
+	
 
 	
 	

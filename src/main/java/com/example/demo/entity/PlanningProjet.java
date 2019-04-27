@@ -3,6 +3,7 @@ package com.example.demo.entity;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
@@ -12,14 +13,19 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import com.example.demo.util.EfficaciteEnum;
 import com.example.demo.util.TypePlanningEnum;
@@ -34,46 +40,45 @@ public class PlanningProjet implements Serializable {
 	 * 
 	 */
 
-	
-
-	@Id
-	private Long idAuditeur;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long numPlanning;
 
-	
 	private Long idProjet;
-	
-	private Long idAudite;
+
 
 	private Long idDepartement;
 
 	private LocalDateTime datePlan;
 
 	private boolean etat = false;
-	
-    @Column(length = 1024)
+
+	@Column(length = 1024)
 	private String description;
 
 	@Enumerated(EnumType.STRING)
-    private TypePlanningEnum typePlanning;
-
+	private TypePlanningEnum typePlanning;
 	
-
-	@ManyToOne // insertable=false,updatable=false c'est pas la responsabilite planning projet// d'ajouter ou màj l'auditeur
-	@JoinColumn(name = "idAuditeur", referencedColumnName = "id", insertable = false, updatable = false)
-	private User auditeur;
-
-	@ManyToOne 
-	@JoinColumn(name = "idAudite", referencedColumnName = "id", insertable = false, updatable = false)
-	private User audite;
+    @OnDelete(action=OnDeleteAction.CASCADE)
+	@ManyToMany
+	@JoinTable(name="PLANS_AUDITEURS",
+	joinColumns={@JoinColumn(name="PLANS_ID")},
+	inverseJoinColumns={@JoinColumn(name="AUDITEUR_ID")})
+	private List<User> auditeurs;
 	
-	@ManyToOne
+    @OnDelete(action=OnDeleteAction.CASCADE)
+	@ManyToMany
+	@JoinTable(name="PLANS_AUDITES",
+	joinColumns={@JoinColumn(name="PLANS_ID")},
+	inverseJoinColumns={@JoinColumn(name="AUDITE_ID")})
+	private List<User> audites;
+	
+    @OnDelete(action=OnDeleteAction.CASCADE)
+	@ManyToOne// insertable=false,updatable=false c'est pas la responsabilite planning// projet// d'ajouter ou màj l'auditeur
 	@JoinColumn(name = "idProjet", referencedColumnName = "id", insertable = false, updatable = false)
 	private Projet projet;
-	
+    
+    @OnDelete(action=OnDeleteAction.CASCADE)
 	@ManyToOne
 	@JoinColumn(name = "idDepartement", referencedColumnName = "idDep", insertable = false, updatable = false)
 	private Departement departement;
@@ -82,23 +87,10 @@ public class PlanningProjet implements Serializable {
 		super();
 	}
 
-	public PlanningProjet(Audit audit, User auditeur) {
+	public PlanningProjet(Audit audit) {
 		super();
-		this.auditeur = auditeur;
 
 	}
-
-	
-
-	public User getAuditeur() {
-		return auditeur;
-	}
-
-	public void setAuditeur(User auditeur) {
-		this.auditeur = auditeur;
-	}
-
-	
 
 	public Projet getProjet() {
 		return projet;
@@ -106,16 +98,6 @@ public class PlanningProjet implements Serializable {
 
 	public void setProjet(Projet projet) {
 		this.projet = projet;
-	}
-
-	
-
-	public Long getIdAuditeur() {
-		return idAuditeur;
-	}
-
-	public void setIdAuditeur(Long idAuditeur) {
-		this.idAuditeur = idAuditeur;
 	}
 
 	public Long getNumPlanning() {
@@ -126,13 +108,6 @@ public class PlanningProjet implements Serializable {
 		this.numPlanning = numPlanning;
 	}
 
-	/*public Long getIdProjet() {
-		return idProjet;
-	}
-
-	public void setIdProjet(Long idProjet) {
-		this.idProjet = idProjet;
-	}*/
 
 	public LocalDateTime getDatePlan() {
 		return datePlan;
@@ -189,25 +164,24 @@ public class PlanningProjet implements Serializable {
 	public void setTypePlanning(TypePlanningEnum typePlanning) {
 		this.typePlanning = typePlanning;
 	}
-
-	public Long getIdAudite() {
-		return idAudite;
+	
+	public List<User> getAuditeurs() {
+		return auditeurs;
 	}
 
-	public void setIdAudite(Long idAudite) {
-		this.idAudite = idAudite;
+	public void setAuditeurs(List<User> auditeurs) {
+		this.auditeurs = auditeurs;
 	}
 
-	public User getAudite() {
-		return audite;
+	public List<User> getAudites() {
+		return audites;
 	}
 
-	public void setAudite(User audite) {
-		this.audite = audite;
+	public void setAudites(List<User> audites) {
+		this.audites = audites;
 	}
-
-	///////////////////////////////////
 	
 	
+
 
 }

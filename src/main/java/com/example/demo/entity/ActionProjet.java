@@ -49,9 +49,9 @@ public class ActionProjet {
 	
 	
 	
-	@OneToMany
+	/*@OneToMany
 	@JoinColumn(name = "actionP_id", referencedColumnName = "id")
-	private List<ActionProjet> autreActionProjets;
+	private List<ActionProjet> autreActionProjets;*/
 
 	@OneToMany
 	@JoinColumn(name = "ACTIONPROJET_ID", referencedColumnName = "id")
@@ -128,13 +128,7 @@ public class ActionProjet {
 
 	
 
-	public List<ActionProjet> getAutreActionProjets() {
-		return autreActionProjets;
-	}
-
-	public void setAutreActionProjets(List<ActionProjet> autreActionProjets) {
-		this.autreActionProjets = autreActionProjets;
-	}
+	
 
 	
 	

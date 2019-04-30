@@ -36,6 +36,7 @@ public class SousAction {
 	private LocalDateTime dateEvaluation;
 	private LocalDateTime dateRealisation;
 
+	private Long numero;
 	@Column(length = 1024)
 	private String methode;
 	@Column(length = 1024)
@@ -50,6 +51,7 @@ public class SousAction {
 	@Enumerated(EnumType.STRING)
 	private StatusEnum status;
 
+	
 	@Enumerated(EnumType.STRING)
 	private EfficaciteEnum efficacite;
 	
@@ -163,6 +165,14 @@ public class SousAction {
 
 	public void setResponsable(User responsable) {
 		this.responsable = responsable;
+	}
+
+	public Long getNumero() {
+		return numero;
+	}
+
+	public void setNumero(Long numero) {
+		this.numero = numero;
 	}
 
 	

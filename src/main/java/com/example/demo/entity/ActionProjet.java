@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,6 +20,7 @@ import com.example.demo.util.EfficaciteEnum;
 import com.example.demo.util.RessourceEnum;
 import com.example.demo.util.StatusEnum;
 import com.example.demo.util.TypeActionEnum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class ActionProjet {
@@ -43,6 +45,13 @@ public class ActionProjet {
 
 	@ManyToOne
 	private EnJeux enJeux;
+
+	
+	
+	
+	@OneToMany
+	@JoinColumn(name = "actionP_id", referencedColumnName = "id")
+	private List<ActionProjet> autreActionProjets;
 
 	@OneToMany
 	@JoinColumn(name = "ACTIONPROJET_ID", referencedColumnName = "id")
@@ -116,6 +125,19 @@ public class ActionProjet {
 	public void setDepartement(Departement departement) {
 		this.departement = departement;
 	}
+
+	
+
+	public List<ActionProjet> getAutreActionProjets() {
+		return autreActionProjets;
+	}
+
+	public void setAutreActionProjets(List<ActionProjet> autreActionProjets) {
+		this.autreActionProjets = autreActionProjets;
+	}
+
+	
+	
 	
 	
 	

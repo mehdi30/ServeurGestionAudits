@@ -5,7 +5,8 @@ public enum TypeConstatEnum {
 	PointFort ("Point Fort"),
 	NC ("NC"),
 	PP ("PP"),
-	PS ("PS");
+	PS ("PS"),
+	VIDE ("VIDE");
 
 	private String name;
 	

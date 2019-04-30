@@ -49,7 +49,6 @@ public class RapportProjetController extends CrudController<RapportProjet, Long>
 		Long id = Long.parseLong((String) mapper.get("exigence"));
 		LocalDateTime currentDate = LocalDateTime.now();
 
-		String commentaire = ((String) mapper.get("commentaire"));
 		String libelle = ((String) mapper.get("libelle"));
 		String typeConstat = ((String) mapper.get("typeConstat"));
 		String activite = ((String) mapper.get("activite"));
@@ -61,9 +60,11 @@ public class RapportProjetController extends CrudController<RapportProjet, Long>
 		rapport.setPlanningProjet(planning);
 		rapport.setMaj(currentDate);
 		rapport.setActivite(activite);
-		rapport.setCommentaire(commentaire);
 		rapport.setLibelle(libelle);
-		rapport.setTypeConstat(TypeConstatEnum.valueOf(typeConstat));
+		
+			rapport.setTypeConstat(TypeConstatEnum.valueOf(typeConstat));
+
+		
 		rapport.setExigence(exigence);
 		rapportProjetService.add(rapport);
 
@@ -80,14 +81,12 @@ public class RapportProjetController extends CrudController<RapportProjet, Long>
 		LocalDateTime currentDate = LocalDateTime.now();
 
 		// System.out.println(x);
-		String commentaire = ((String) mapper.get("commentaire"));
 		String libelle = ((String) mapper.get("libelle"));
 		String activite = ((String) mapper.get("activite"));
 
 		Exigence exigence = exigenceRepository.getOne(ide);
 		RapportProjet rapport = rapportProjetReposistory.getOne(id);
 		rapport.setActivite(activite);
-		rapport.setCommentaire(commentaire);
 		rapport.setMaj(currentDate);
 
 		rapport.setLibelle(libelle);

@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import com.example.demo.entity.PlanningProjet;
 import com.example.demo.entity.PlanningProjetPk;
 
-public interface PlanningProjetRepository extends JpaRepository<PlanningProjet, PlanningProjetPk>{
+public interface PlanningProjetRepository extends JpaRepository<PlanningProjet, Long>{
 
 	@Query("SELECT p FROM PlanningProjet p WHERE p.etat = 'FALSE'")
 	List<PlanningProjet> findAllPlanifie();

@@ -50,6 +50,7 @@ public class SousActionService implements ICrudService<SousAction, Long>{
 				obj.setStatus(c.getStatus());
 				obj.setEfficacite(c.getEfficacite());
 				obj.setDelai(c.getDelai());
+				obj.setNumero(c.getNumero());
 				obj.setDateRealisation(c.getDateRealisation());
 				//obj.setNumero(c.getNumero());
 				obj.setDateEvaluation(c.getDateEvaluation());

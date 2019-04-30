@@ -38,7 +38,9 @@ public class RapportProjetService implements ICrudService<RapportProjet, Long>{
 
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
+		RapportProjet r = new RapportProjet();
+		r.setId(id);
+		rapportProjetRepository.delete(r);
 		
 	}
 

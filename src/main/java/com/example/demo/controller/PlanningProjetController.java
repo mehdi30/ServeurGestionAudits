@@ -43,10 +43,10 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 	@RequestMapping(value = "/s/{numPlanning}", method = RequestMethod.DELETE)
 	public void deletebynum(@PathVariable Long numPlanning) {
 
-		 planningProjetService.delete(numPlanning);
-
+		planningProjetService.delete(numPlanning);
 
 	}
+
 	@RequestMapping("/List/Planifie")
 	public List<PlanningProjet> AllPlanifie() {
 		return planningProjetService.getAllPlanifie();
@@ -73,10 +73,12 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 		PlanningProjet planningProjet = new PlanningProjet();
 		List<User> list = new ArrayList<User>();
 
-		for (Integer i = 1; i < l.size(); i++) {
-			System.out.println(l.get(i));
+		for (Integer i = 0; i < l.size(); i++) {
+			if (String.valueOf(l.get(i)).equals("")) {
+
+			} else {
 			User auditeur = userRepository.getOne(l.get(i).longValue());
-			list.add(auditeur);
+			list.add(auditeur);}
 
 		}
 		planningProjet.setAuditeurs(list);
@@ -110,11 +112,17 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 		PlanningProjet planningProjet = new PlanningProjet();
 		List<User> list = new ArrayList<User>();
 
-		for (Integer i = 1; i < l.size(); i++) {
+		for (Integer i = 0; i < l.size(); i++) {
 
-			User auditeur = userRepository.getOne(l.get(i).longValue());
-			list.add(auditeur);
-			
+			if (String.valueOf(l.get(i)).equals("")) {
+
+				System.out.println("hiiiiiiiii!!");
+			} else {
+				User auditeur = userRepository.getOne(l.get(i).longValue());
+				list.add(auditeur);
+
+			}
+
 		}
 		planningProjet.setAuditeurs(list);
 
@@ -123,16 +131,20 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 		planningProjet.setTypePlanning(TypePlanningEnum.valueOf(typePlanning));
 
 		planningProjet.setDescription(description);
-		
-		List<User> lista = new ArrayList<User>();
-		System.out.println(l.get(0)+ "hedhiii sfer auditeur");
-		System.out.println(la.get(0)+ "hedhiii sfer audite");
 
-		for (Integer i = 1; i < la.size(); i++) {
+		List<User> lista = new ArrayList<User>();
+		System.out.println(l.get(0) + "hedhiii sfer auditeur");
+		System.out.println(la.get(0) + "hedhiii sfer audite");
+
+		for (Integer i = 0; i < la.size(); i++) {
+			if (String.valueOf(la.get(i)).equals("")) {
+
+				System.out.println("hiiiiiiiii!!");
+			} else {
 				User auditeur = userRepository.getOne(la.get(i).longValue());
 				lista.add(auditeur);
-			
-		
+
+			}
 
 		}
 		planningProjet.setAudites(lista);

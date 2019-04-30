@@ -18,6 +18,8 @@ public class EnJeux {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 	
+	private String nom;
+	
 	@Column(length = 1024)
     private String description;
 	
@@ -50,6 +52,14 @@ public class EnJeux {
 
 	public void setTypeEnJeux(TypeEnJeuxEnum typeEnJeux) {
 		this.typeEnJeux = typeEnJeux;
+	}
+
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
 	}
 	
 	

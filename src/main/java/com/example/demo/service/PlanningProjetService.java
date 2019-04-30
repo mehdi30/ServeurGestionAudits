@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.PlanningProjet;
+import com.example.demo.entity.PlanningProjetPk;
 import com.example.demo.respository.PlanningProjetRepository;
 import com.example.demo.service.interfaces.IPlanningProjet;
 

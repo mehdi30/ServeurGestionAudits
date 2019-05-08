@@ -75,7 +75,7 @@ public class RapportProjetController extends CrudController<RapportProjet, Long>
 	@RequestMapping(value = "/Update/{id}", method = RequestMethod.PUT)
 	public ResponseEntity updatePlanningProjet(@RequestBody HashMap<String, Object> mapper, @PathVariable Long id) {
 
-		Long ide = Long.parseLong((String) mapper.get("exigence"));
+		Integer ide = (Integer) mapper.get("exigence");
 		String typeConstat = ((String) mapper.get("typeConstat"));
 
 		LocalDateTime currentDate = LocalDateTime.now();
@@ -84,7 +84,7 @@ public class RapportProjetController extends CrudController<RapportProjet, Long>
 		String libelle = ((String) mapper.get("libelle"));
 		String activite = ((String) mapper.get("activite"));
 
-		Exigence exigence = exigenceRepository.getOne(ide);
+		Exigence exigence = exigenceRepository.getOne(ide.longValue());
 		RapportProjet rapport = rapportProjetReposistory.getOne(id);
 		rapport.setActivite(activite);
 		rapport.setMaj(currentDate);

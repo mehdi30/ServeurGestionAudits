@@ -21,6 +21,7 @@ import com.example.demo.entity.PlanningProjet;
 import com.example.demo.entity.PlanningProjetPk;
 import com.example.demo.entity.Projet;
 import com.example.demo.entity.RapportProjet;
+import com.example.demo.entity.SousAction;
 import com.example.demo.entity.User;
 import com.example.demo.respository.ProjetRepository;
 import com.example.demo.respository.UserRepository;
@@ -61,6 +62,7 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 
 	@RequestMapping(value = "/Add", method = RequestMethod.POST)
 	public ResponseEntity addPlanningProjet(@RequestBody HashMap<String, Object> mapper) {
+		ArrayList<Integer> la = (ArrayList<Integer>) (mapper.get("audite"));
 
 		ArrayList<Integer> l = (ArrayList<Integer>) (mapper.get("user"));
 		LocalDateTime datePlan = LocalDateTime.parse((String) mapper.get("datePlan"));
@@ -77,10 +79,25 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 			if (String.valueOf(l.get(i)).equals("")) {
 
 			} else {
-			User auditeur = userRepository.getOne(l.get(i).longValue());
-			list.add(auditeur);}
+				User auditeur = userRepository.getOne(l.get(i).longValue());
+				list.add(auditeur);
+			}
 
 		}
+
+		List<User> lista = new ArrayList<User>();
+
+		for (Integer i = 0; i < la.size(); i++) {
+			if (!String.valueOf(la.get(i)).equals("")) {
+
+				User auditeur = userRepository.getOne(la.get(i).longValue());
+				lista.add(auditeur);
+
+			}
+
+		}
+		planningProjet.setAudites(lista);
+
 		planningProjet.setAuditeurs(list);
 
 		planningProjet.setAudites(Arrays.asList(projet.getManager()));
@@ -114,10 +131,9 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 
 		for (Integer i = 0; i < l.size(); i++) {
 
-			if (String.valueOf(l.get(i)).equals("")) {
+			if (!String.valueOf(l.get(i)).equals("")) {
 
-				System.out.println("hiiiiiiiii!!");
-			} else {
+			
 				User auditeur = userRepository.getOne(l.get(i).longValue());
 				list.add(auditeur);
 
@@ -133,14 +149,11 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 		planningProjet.setDescription(description);
 
 		List<User> lista = new ArrayList<User>();
-		System.out.println(l.get(0) + "hedhiii sfer auditeur");
-		System.out.println(la.get(0) + "hedhiii sfer audite");
 
 		for (Integer i = 0; i < la.size(); i++) {
-			if (String.valueOf(la.get(i)).equals("")) {
+			if (!String.valueOf(la.get(i)).equals("")) {
 
-				System.out.println("hiiiiiiiii!!");
-			} else {
+			
 				User auditeur = userRepository.getOne(la.get(i).longValue());
 				lista.add(auditeur);
 
@@ -162,5 +175,24 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 		return planningProjetService.getPlanningByNumPlanning(numPlanning);
 
 	}
+	
+	@RequestMapping(value = "/UPlanningP/{id}", method = RequestMethod.PUT)
+	public void updatePlanningProjet(@RequestBody HashMap<String, Object> mapper, @PathVariable Long id) {
+		
+		
+		planningProjetService.updatePlanningProjet(id, mapper);
+		
+
+	}
+	
+	@RequestMapping(value = "/UPlanningD/{id}", method = RequestMethod.PUT)
+	public void updatePlanningDepartement(@RequestBody HashMap<String, Object> mapper, @PathVariable Long id) {
+		
+		
+		planningProjetService.updatePlanningDepartement(id, mapper);
+		
+
+	}
+
 
 }

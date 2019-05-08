@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -52,6 +54,8 @@ public class CrudUserController extends CrudController<User, Long>{
 		Role role = roleRepository.findByName(RoleEnum.ROLE_USER.getName());
 		user.setRoles(Arrays.asList(role));
 		user.setEnable(true);
+		LocalDateTime currentDate = LocalDateTime.now();
+        user.setCreation(currentDate);
 		super.add(user);
 	}
 	
@@ -64,6 +68,12 @@ public class CrudUserController extends CrudController<User, Long>{
 	  @RequestMapping(value = "/projet/{id}", method = RequestMethod.GET)
 	    public User getByProjet(@PathVariable("id") Long id) {
 	    	return userService.getByIdprojet(id);
+	       
+	    }
+	  
+	  @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+	    public Optional<User> getByid(@PathVariable("id") Long id) {
+	    	return userService.getById(id);
 	       
 	    }
 }

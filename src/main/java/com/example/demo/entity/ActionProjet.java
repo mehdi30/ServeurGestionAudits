@@ -16,6 +16,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.example.demo.util.EfficaciteEnum;
 import com.example.demo.util.RessourceEnum;
 import com.example.demo.util.StatusEnum;
@@ -36,7 +39,7 @@ public class ActionProjet {
 
 	@ManyToOne
 	private RapportProjet rapportProjet;
-	
+
 	@ManyToOne
 	private Departement departement;
 
@@ -46,12 +49,16 @@ public class ActionProjet {
 	@ManyToOne
 	private EnJeux enJeux;
 
-	
-	
-	
-	/*@OneToMany
-	@JoinColumn(name = "actionP_id", referencedColumnName = "id")
-	private List<ActionProjet> autreActionProjets;*/
+	@OnDelete(action = OnDeleteAction.CASCADE)
+	@Column(name = "ecart_ID")
+	private Integer ecartID;
+
+	/*
+	 * @OneToMany
+	 * 
+	 * @JoinColumn(name = "actionP_id", referencedColumnName = "id") private
+	 * List<ActionProjet> autreActionProjets;
+	 */
 
 	@OneToMany
 	@JoinColumn(name = "ACTIONPROJET_ID", referencedColumnName = "id")
@@ -64,7 +71,6 @@ public class ActionProjet {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 	public ActionProjet() {
 		super();
@@ -126,14 +132,13 @@ public class ActionProjet {
 		this.departement = departement;
 	}
 
-	
+	public Integer getEcartID() {
+		return ecartID;
+	}
+
+	public void setEcartID(Integer ecartID) {
+		this.ecartID = ecartID;
+	}
 
 	
-
-	
-	
-	
-	
-	
-
 }

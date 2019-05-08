@@ -33,14 +33,14 @@ public class ProjetController extends CrudController<Projet, Long> {
 	public ResponseEntity addPlanningProjet(@RequestBody HashMap<String, Object> mapper) {
 
 		String title = ((String) mapper.get("title"));
-		Long idManager = Long.parseLong((String) mapper.get("manager"));
+		Integer idManager =  ((Integer) mapper.get("manager"));
 
 		String typeprojet = ((String) mapper.get("typeProjet"));
 
 		Projet projet = new Projet();
 		projet.setTitle(title);
 		User manager = new User();
-		manager.setId(idManager);
+		manager.setId(idManager.longValue());
 		projet.setManager(manager);
 			projet.setTypeProjet(TypeProjetEnum.valueOf(typeprojet));
 
@@ -55,14 +55,14 @@ public class ProjetController extends CrudController<Projet, Long> {
 	public ResponseEntity updatePlanningProjet(@RequestBody HashMap<String, Object> mapper, @PathVariable Long id) {
 
 		String title = ((String) mapper.get("title"));
-		Long idManager = Long.parseLong((String) mapper.get("manager"));
+		Integer idManager =  ((Integer) mapper.get("manager"));
 		// Long idProjet = Long.parseLong((String)mapper.get("id"));
 		String typeprojet = ((String) mapper.get("typeProjet"));
 
 		Projet projet = projetRepository.getOne(id);
 		projet.setTitle(title);
 		User manager = new User();
-		manager.setId(idManager);
+		manager.setId(idManager.longValue());
 		projet.setManager(manager);
 		projet.setTypeProjet(TypeProjetEnum.valueOf(typeprojet));
 

@@ -65,25 +65,7 @@ public class SousActionController extends CrudController<SousAction, Long>{
 	@RequestMapping(value = "/USA/{id}", method = RequestMethod.PUT)
 	public void CompleterSousAction(@RequestBody SousAction sousAction, @PathVariable Long id) {
 		
-		/*String methode = ((String) mapper.get("methode"));
-		String status = ((String) mapper.get("status"));
-		String efficacite = ((String) mapper.get("efficacite"));
-		LocalDateTime dateEvaluation = LocalDateTime.parse((String)mapper.get("dateEvaluation"));
-		LocalDateTime delai = LocalDateTime.parse((String)mapper.get("delai"));
-		LocalDateTime dateRealisation = LocalDateTime.parse((String)mapper.get("dateRealisation"));
-		Long idr = Long.parseLong((String) mapper.get("responsable"));
-		String commentaire = ((String) mapper.get("commentaire"));
-
-		SousAction sAction = sousActionRepository.getOne(id);
-		User resp = userRepository.getOne(idr);
-		sAction.setMethode(methode);
-		sAction.setStatus(StatusEnum.valueOf(status));
-		sAction.setEfficacite(EfficaciteEnum.valueOf(efficacite));
-		sAction.setDateEvaluation(dateEvaluation);
-		sAction.setDelai(delai);
-		sAction.setDateRealisation(dateRealisation);
-		sAction.setResponsable(resp);
-		sAction.setCommentaire(commentaire);*/
+		
 		sActionService.updateSousAction(id, sousAction);
 		
 

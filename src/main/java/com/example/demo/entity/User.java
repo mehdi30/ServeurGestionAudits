@@ -1,6 +1,8 @@
 package com.example.demo.entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -39,7 +41,19 @@ public class User {
 	
 	private String lastname;
 
+	private String email;
+	
+	private LocalDate naissance;
+
+	private LocalDateTime creation;
+
+	@Column(length = 512)
+	private String apropos;
+	
+	private Integer tel;
+
 	private String password;
+	
 	
 	private boolean enable;
 	
@@ -132,6 +146,46 @@ public class User {
 
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public LocalDate getNaissance() {
+		return naissance;
+	}
+
+	public void setNaissance(LocalDate naissance) {
+		this.naissance = naissance;
+	}
+
+	public String getApropos() {
+		return apropos;
+	}
+
+	public void setApropos(String apropos) {
+		this.apropos = apropos;
+	}
+
+	public Integer getTel() {
+		return tel;
+	}
+
+	public void setTel(Integer tel) {
+		this.tel = tel;
+	}
+
+	public LocalDateTime getCreation() {
+		return creation;
+	}
+
+	public void setCreation(LocalDateTime creation) {
+		this.creation = creation;
 	}
 
 	

@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
@@ -25,6 +26,12 @@ public class UserService implements ICrudService<User, Long>{
 	public User getByIdprojet(Long id) {
 		
 		return userRepository.findByProjetsId(id);
+		
+	}
+	
+public Optional<User> getById(Long id) {
+		
+		return userRepository.findById(id);
 		
 	}
 

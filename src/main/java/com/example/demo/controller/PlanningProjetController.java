@@ -17,16 +17,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.entity.Departement;
 import com.example.demo.entity.PlanningProjet;
 import com.example.demo.entity.PlanningProjetPk;
 import com.example.demo.entity.Projet;
 import com.example.demo.entity.RapportProjet;
 import com.example.demo.entity.SousAction;
 import com.example.demo.entity.User;
+import com.example.demo.respository.DepartementRepository;
+import com.example.demo.respository.PlanningProjetRepository;
 import com.example.demo.respository.ProjetRepository;
 import com.example.demo.respository.UserRepository;
 import com.example.demo.service.PlanningProjetService;
 import com.example.demo.service.ProjetService;
+import com.example.demo.util.EtatPlanningEnum;
 import com.example.demo.util.TypePlanningEnum;
 
 @RestController
@@ -40,7 +44,12 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 	private ProjetRepository projetRepository;
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
+	private PlanningProjetRepository planningProjetRepository;
 
+	@Autowired
+	private DepartementRepository departementRepository;
+	
 	@RequestMapping(value = "/s/{numPlanning}", method = RequestMethod.DELETE)
 	public void deletebynum(@PathVariable Long numPlanning) {
 
@@ -50,15 +59,15 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 
 	@RequestMapping("/List/Planifie")
 	public List<PlanningProjet> AllPlanifie() {
-		return planningProjetService.getAllPlanifie();
+		return planningProjetService.getAll();
 
 	}
 
-	@RequestMapping("/List/Realise")
+	/*@RequestMapping("/List/Realise")
 	public List<PlanningProjet> AllRealise() {
 		return planningProjetService.getAllRealise();
 
-	}
+	}*/
 
 	@RequestMapping(value = "/Add", method = RequestMethod.POST)
 	public ResponseEntity addPlanningProjet(@RequestBody HashMap<String, Object> mapper) {
@@ -72,7 +81,11 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 
 		Projet projet = projetRepository.getOne(idProjet);
 
+
 		PlanningProjet planningProjet = new PlanningProjet();
+		planningProjet.setTitle(projet.getTitle() + " " + projet.getTypeProjet().getName());
+		planningProjet.setClassName("event-red");
+
 		List<User> list = new ArrayList<User>();
 
 		for (Integer i = 0; i < l.size(); i++) {
@@ -107,7 +120,8 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 
 		planningProjet.setTypePlanning(TypePlanningEnum.valueOf(typePlanning));
 
-		planningProjet.setDatePlan(datePlan);
+		planningProjet.setStart(datePlan);
+		planningProjet.setEtatPlanning(EtatPlanningEnum.Planifié);
 
 		planningProjetService.add(planningProjet);
 
@@ -118,6 +132,7 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 	public ResponseEntity addPlanningDepartement(@RequestBody HashMap<String, Object> mapper) {
 
 		Long idDep = Long.parseLong((String) mapper.get("departement"));
+		Departement d = departementRepository.getOne(idDep);
 		ArrayList<Integer> la = (ArrayList<Integer>) (mapper.get("audite"));
 		String description = ((String) mapper.get("description"));
 
@@ -133,7 +148,6 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 
 			if (!String.valueOf(l.get(i)).equals("")) {
 
-			
 				User auditeur = userRepository.getOne(l.get(i).longValue());
 				list.add(auditeur);
 
@@ -147,13 +161,13 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 		planningProjet.setTypePlanning(TypePlanningEnum.valueOf(typePlanning));
 
 		planningProjet.setDescription(description);
-
+		planningProjet.setClassName("event-red");
+		planningProjet.setTitle(d.getProcessus().getName());
 		List<User> lista = new ArrayList<User>();
 
 		for (Integer i = 0; i < la.size(); i++) {
 			if (!String.valueOf(la.get(i)).equals("")) {
 
-			
 				User auditeur = userRepository.getOne(la.get(i).longValue());
 				lista.add(auditeur);
 
@@ -162,7 +176,9 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 		}
 		planningProjet.setAudites(lista);
 
-		planningProjet.setDatePlan(datePlan);
+		planningProjet.setStart(datePlan);
+
+		planningProjet.setEtatPlanning(EtatPlanningEnum.Planifié);
 
 		planningProjetService.add(planningProjet);
 
@@ -175,24 +191,39 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 		return planningProjetService.getPlanningByNumPlanning(numPlanning);
 
 	}
-	
+
 	@RequestMapping(value = "/UPlanningP/{id}", method = RequestMethod.PUT)
 	public void updatePlanningProjet(@RequestBody HashMap<String, Object> mapper, @PathVariable Long id) {
-		
-		
+
 		planningProjetService.updatePlanningProjet(id, mapper);
-		
+
+	}
+
+	@RequestMapping(value = "/UPlanningD/{id}", method = RequestMethod.PUT)
+	public void updatePlanningDepartement(@RequestBody HashMap<String, Object> mapper, @PathVariable Long id) {
+
+		planningProjetService.updatePlanningDepartement(id, mapper);
 
 	}
 	
-	@RequestMapping(value = "/UPlanningD/{id}", method = RequestMethod.PUT)
-	public void updatePlanningDepartement(@RequestBody HashMap<String, Object> mapper, @PathVariable Long id) {
-		
-		
-		planningProjetService.updatePlanningDepartement(id, mapper);
-		
+	@RequestMapping(value = "/Annuler/{numPlanning}", method = RequestMethod.PUT)
+	public void annulerPlanning(@RequestBody PlanningProjet planningP, @PathVariable Long numPlanning) {
+
+		PlanningProjet a = planningProjetRepository.findByNumPlanning(numPlanning);
+		a.setEtat(true);
+
+		planningProjetService.update(a);
 
 	}
+	@RequestMapping(value = "/Valider/{numPlanning}", method = RequestMethod.PUT)
+	public void ValiderPlanning(@RequestBody PlanningProjet planningP, @PathVariable Long numPlanning) {
 
+		PlanningProjet a = planningProjetRepository.findByNumPlanning(numPlanning);
+		a.setEtat(false);
+		a.setEtatPlanning(EtatPlanningEnum.Planifié);
+
+		planningProjetService.update(a);
+
+	}
 
 }

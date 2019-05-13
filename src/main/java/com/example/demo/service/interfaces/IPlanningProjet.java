@@ -7,7 +7,7 @@ import com.example.demo.entity.PlanningProjet;
 
 public interface IPlanningProjet {
 
-	List<PlanningProjet> getAllPlanifie();
-	List<PlanningProjet> getAllRealise();
+	//List<PlanningProjet> getAllPlanifie();
+	//List<PlanningProjet> getAllRealise();
 	PlanningProjet getPlanningByNumPlanning(Long num);
 }

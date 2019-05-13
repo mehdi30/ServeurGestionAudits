@@ -26,31 +26,19 @@ public class ActionProjetService implements  ICrudService<ActionProjet, Long>,IA
 	SousActionRepository sousActionProjetRepository;
 	@Override
 	public void updateActionProjet(Long id, ActionProjet c) {
-		// TODO Auto-generated method stub
 		try {
 			ActionProjet a = actionProjetRepository.getOne(id);
 			if(a!= null) {
 				ActionProjet obj = a;
-				//obj.setMethode(c.getMethode());
-				//obj.setCommentaire(c.getCommentaire());
-				//.setStatus(c.getStatus());
-				//obj.setEfficacite(c.getEfficacite());
-				//obj.setNumero(c.getNumero());
-				//obj.setDateEvaluation(c.getDateEvaluation()); 
-				//SousAction s = new SousAction();
+			
 				LocalDateTime currentDate = LocalDateTime.now();
-              //   obj.s
-                  // obj.setDateRealisation(currentDate);
 
 				actionProjetRepository.save(obj);
 			}
 		}catch (Exception e) {
-			//logger.error(e.getMessage());
 		}
 	}
-	/*public List<ActionProjet> getByStatus(StatusEnum status){
-		return actionProjetRepository.findByStatus(status);
-	}*/
+	
 	@Override
 	public List<ActionProjet> getAll() {
 		return actionProjetRepository.findAll();

@@ -57,8 +57,8 @@ public class ServeurGestionAuditsApplication {
 		
 		
 		//action.setSousActions(Arrays.asList(saction));
-		*/
-		/*
+		*/ /*
+		
 		
 	DepartementRepository departementRepository = ctx.getBean(DepartementRepository.class);
 	Departement d = new Departement(ProcessusEnum.Technique,"lac 2");

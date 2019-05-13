@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.entity.ActionProjet;
 import com.example.demo.entity.PlanningProjet;
 import com.example.demo.entity.PlanningProjetPk;
 import com.example.demo.entity.SousAction;
@@ -55,15 +56,15 @@ public class PlanningProjetService implements ICrudService<PlanningProjet, Long>
 		planningProjetRepository.delete(plan);
 	}
 
-	@Override
+	/*@Override
 	public List<PlanningProjet> getAllPlanifie() {
-		return planningProjetRepository.findAllPlanifie();
+		//return planningProjetRepository.findAllPlanifie();
 	}
 
 	@Override
 	public List<PlanningProjet> getAllRealise() {
 		return planningProjetRepository.findAllRealise();
-	}
+	}*/
 	
 	public void updatePlanningProjet(Long id, HashMap<String, Object> mapper) {
 		String description = ((String) mapper.get("description"));
@@ -85,7 +86,7 @@ public class PlanningProjetService implements ICrudService<PlanningProjet, Long>
 			if(s!= null) {
 				PlanningProjet obj = s;
 				obj.setDescription(description);
-				obj.setDatePlan(datePlan);
+				obj.setStart(datePlan);
 				obj.setIdProjet(idp.longValue());
 				obj.setTypePlanning(TypePlanningEnum.valueOf(typePlanning));
 
@@ -144,7 +145,7 @@ public class PlanningProjetService implements ICrudService<PlanningProjet, Long>
 			if(s!= null) {
 				PlanningProjet obj = s;
 				obj.setDescription(description);
-				obj.setDatePlan(datePlan);
+				obj.setStart(datePlan);
 				obj.setIdDepartement(idp.longValue());
 				obj.setTypePlanning(TypePlanningEnum.valueOf(typePlanning));
 
@@ -180,6 +181,21 @@ public class PlanningProjetService implements ICrudService<PlanningProjet, Long>
 			}
 		}catch (Exception e) {
 			//logger.error(e.getMessage());
+		}
+	}
+	
+	
+	public void AnnulerPlanning(Long id, PlanningProjet c) {
+		try {
+			PlanningProjet a = planningProjetRepository.getOne(id);
+			if(a!= null) {
+				PlanningProjet obj = a;
+				obj.setEtatPlanning(c.getEtatPlanning());
+			    obj.setEtat(c.isEtat());
+			    obj.setEtat(true);
+				planningProjetRepository.save(obj);
+			}
+		}catch (Exception e) {
 		}
 	}
 

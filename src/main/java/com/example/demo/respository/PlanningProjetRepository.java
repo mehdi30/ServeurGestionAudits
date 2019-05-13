@@ -10,11 +10,11 @@ import com.example.demo.entity.PlanningProjetPk;
 
 public interface PlanningProjetRepository extends JpaRepository<PlanningProjet, Long>{
 
-	@Query("SELECT p FROM PlanningProjet p WHERE p.etat = 'FALSE'")
-	List<PlanningProjet> findAllPlanifie();
+	/*@Query("SELECT p FROM PlanningProjet p WHERE p.etat = 'FALSE'")
+	List<PlanningProjet> findAllPlanifie();*/
 	
-	@Query("SELECT p FROM PlanningProjet p WHERE p.etat = 'TRUE'")
-	List<PlanningProjet> findAllRealise();
+	/*@Query("SELECT p FROM PlanningProjet p WHERE p.etat = 'TRUE'")
+	List<PlanningProjet> findAllRealise();*/
 	
 
 	PlanningProjet findByNumPlanning(Long numPlanning);

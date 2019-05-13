@@ -28,6 +28,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import com.example.demo.util.EfficaciteEnum;
+import com.example.demo.util.EtatPlanningEnum;
 import com.example.demo.util.TypePlanningEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -49,12 +50,23 @@ public class PlanningProjet implements Serializable {
 
 	private Long idDepartement;
 
-	private LocalDateTime datePlan;
 
+	@Column(name = "start1")
+	private LocalDateTime start;
+	
+	
+
+	private String className;
+
+	@Enumerated(EnumType.STRING)
+	private EtatPlanningEnum etatPlanning;
+	
 	private boolean etat = false;
 
 	@Column(length = 1024)
 	private String description;
+
+	private String title;
 
 	@Enumerated(EnumType.STRING)
 	private TypePlanningEnum typePlanning;
@@ -109,14 +121,7 @@ public class PlanningProjet implements Serializable {
 	}
 
 
-	public LocalDateTime getDatePlan() {
-		return datePlan;
-	}
-
-	public void setDatePlan(LocalDateTime datePlan) {
-		this.datePlan = datePlan;
-	}
-
+	
 	public boolean isEtat() {
 		return etat;
 	}
@@ -180,6 +185,45 @@ public class PlanningProjet implements Serializable {
 	public void setAudites(List<User> audites) {
 		this.audites = audites;
 	}
+
+	public EtatPlanningEnum getEtatPlanning() {
+		return etatPlanning;
+	}
+
+	public void setEtatPlanning(EtatPlanningEnum etatPlanning) {
+		this.etatPlanning = etatPlanning;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public LocalDateTime getStart() {
+		return start;
+	}
+
+	public void setStart(LocalDateTime start) {
+		this.start = start;
+	}
+
+	
+
+	public String getClassName() {
+		return className;
+	}
+
+	public void setClassName(String className) {
+		this.className = className;
+	}
+
+	
+	
+
+	
 	
 	
 

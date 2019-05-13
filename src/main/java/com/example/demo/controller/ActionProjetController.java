@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.ActionProjet;
 import com.example.demo.entity.Departement;
+import com.example.demo.entity.Ecart;
 import com.example.demo.entity.EnJeux;
 import com.example.demo.entity.PlanningProjet;
 import com.example.demo.entity.RapportProjet;
@@ -25,6 +26,7 @@ import com.example.demo.entity.Source;
 import com.example.demo.entity.User;
 import com.example.demo.respository.ActionProjetRepository;
 import com.example.demo.respository.DepartementRepository;
+import com.example.demo.respository.EcartRepository;
 import com.example.demo.respository.EnjeuxRepository;
 import com.example.demo.respository.PlanningProjetRepository;
 import com.example.demo.respository.RapportProjetRepository;
@@ -64,7 +66,41 @@ public class ActionProjetController extends CrudController<ActionProjet, Long> {
 	
 	@Autowired
 	ActionProjetRepository actionProjetRepository;
+	
+	@Autowired 
+	EcartController ecartController;
 
+	@Autowired
+	EcartRepository ecartRepository;
+
+	@RequestMapping(value = "/AASE/{id}", method = RequestMethod.POST)
+	public ResponseEntity addActionAEnjeu(@RequestBody HashMap<String, Object> mapper, @PathVariable Long id) {
+
+		Long ide = Long.parseLong((String) mapper.get("enJeux"));
+		Long idd = Long.parseLong((String) mapper.get("departement"));
+
+		String cause = ((String) mapper.get("cause"));
+		Long ids = Long.parseLong((String) mapper.get("source"));
+		LocalDateTime dlancement = LocalDateTime.now();
+
+		EnJeux enjeux = enJeuxRepository.getOne(ide);
+		Source source = sourceRepository.getOne(ids);
+		Departement departement = departmentRepository.getOne(idd);
+		ActionProjet action = new ActionProjet();
+		action.setDepartement(departement);
+		action.setDateLancement(dlancement);
+		action.setSource(source);
+		action.setEnJeux(enjeux);
+		action.setCause(cause);
+		Ecart ecart = ecartRepository.getOne(id);
+          
+		ecartController.add(ecart);
+		action.setEcartID(ecart.getId().intValue());
+		actionProjetService.add(action);
+
+		return new ResponseEntity<>(HttpStatus.OK);
+
+	}
 	@RequestMapping(value = "/AAS", method = RequestMethod.POST)
 	public ResponseEntity addActionProjets(@RequestBody HashMap<String, Object> mapper) {
 
@@ -84,7 +120,10 @@ public class ActionProjetController extends CrudController<ActionProjet, Long> {
 		action.setSource(source);
 		action.setEnJeux(enjeux);
 		action.setCause(cause);
-
+		Ecart ecart = new Ecart();
+          
+		ecartController.add(ecart);
+		action.setEcartID(ecart.getId().intValue());
 		actionProjetService.add(action);
 
 		return new ResponseEntity<>(HttpStatus.OK);
@@ -108,7 +147,10 @@ public class ActionProjetController extends CrudController<ActionProjet, Long> {
 		action.setDateLancement(dlancement);
 		action.setEnJeux(enjeux);
 		action.setRapportProjet(rapport);
-		
+		Ecart ecart = new Ecart();
+        
+		ecartController.add(ecart);
+		action.setEcartID(ecart.getId().intValue());
 		actionProjetService.add(action);
 
 		return new ResponseEntity<>(HttpStatus.OK);
@@ -141,12 +183,12 @@ public class ActionProjetController extends CrudController<ActionProjet, Long> {
 
 	}
 
-	/*
-	 * @RequestMapping(value = "/planifiee/{status}", method = RequestMethod.GET)
-	 * public List<ActionProjet> getByStatus(@PathVariable StatusEnum status) {
-	 * 
-	 * return actionProjetService.getByStatus(status);
-	 * 
-	 * }
-	 */
+	
+	  @RequestMapping(value = "/action/{idr}", method = RequestMethod.GET)
+	  public ActionProjet getByIdRapport(@PathVariable Long idr) {
+	  
+	  return actionProjetRepository.findByRapportProjetId(idr);
+	 
+	  }
+	 
 }

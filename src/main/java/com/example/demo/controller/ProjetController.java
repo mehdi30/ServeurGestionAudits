@@ -20,7 +20,7 @@ import com.example.demo.util.TypeProjetEnum;
 
 @RestController
 @RequestMapping("/crud_projet")
-@CrossOrigin
+//@CrossOrigin
 public class ProjetController extends CrudController<Projet, Long> {
 
 	@Autowired

@@ -31,7 +31,7 @@ import com.example.demo.util.RoleEnum;
 
 @RestController
 @RequestMapping("/crud_user")
-@CrossOrigin
+//@CrossOrigin
 public class CrudUserController extends CrudController<User, Long>{
 
 	

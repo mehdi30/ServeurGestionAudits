@@ -17,6 +17,7 @@ import com.example.demo.entity.User;
 import com.example.demo.respository.PlanningProjetRepository;
 import com.example.demo.respository.UserRepository;
 import com.example.demo.service.interfaces.IPlanningProjet;
+import com.example.demo.util.EtatPlanningEnum;
 import com.example.demo.util.TypePlanningEnum;
 
 @Service
@@ -56,11 +57,15 @@ public class PlanningProjetService implements ICrudService<PlanningProjet, Long>
 		planningProjetRepository.delete(plan);
 	}
 
-	/*@Override
-	public List<PlanningProjet> getAllPlanifie() {
-		//return planningProjetRepository.findAllPlanifie();
+	@Override
+	public List<PlanningProjet> countByMonths() {
+		return planningProjetRepository.countByMonths();
 	}
-
+	@Override
+	public long countByEtatPlanning(EtatPlanningEnum e) {
+		return planningProjetRepository.countPlanningByEtat(e);
+	}
+/*
 	@Override
 	public List<PlanningProjet> getAllRealise() {
 		return planningProjetRepository.findAllRealise();

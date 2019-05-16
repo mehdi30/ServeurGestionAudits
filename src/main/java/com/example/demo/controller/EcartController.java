@@ -8,7 +8,7 @@ import com.example.demo.entity.Ecart;
 
 @RestController
 @RequestMapping("/crud_ecart")
-@CrossOrigin
+//@CrossOrigin
 public class EcartController extends CrudController<Ecart, Long>{
 
 }

@@ -40,7 +40,7 @@ import com.example.demo.util.TypeActionEnum;
 
 @RestController
 @RequestMapping("/crud_action_projet")
-@CrossOrigin
+//@CrossOrigin
 public class ActionProjetController extends CrudController<ActionProjet, Long> {
 
 	@Autowired

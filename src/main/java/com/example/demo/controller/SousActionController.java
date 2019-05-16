@@ -28,7 +28,7 @@ import com.example.demo.util.TypeActionEnum;
 
 @RestController
 @RequestMapping("/crud_sousaction")
-@CrossOrigin
+//@CrossOrigin
 public class SousActionController extends CrudController<SousAction, Long>{
 	
 	@Autowired

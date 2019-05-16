@@ -8,7 +8,7 @@ import com.example.demo.entity.Source;
 
 @RestController
 @RequestMapping("/crud_source")
-@CrossOrigin
+//@CrossOrigin
 public class SourceController extends CrudController<Source, Long>{
 
 }

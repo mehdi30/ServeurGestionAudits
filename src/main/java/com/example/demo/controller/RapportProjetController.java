@@ -29,7 +29,7 @@ import com.example.demo.util.TypeConstatEnum;
 
 @RestController
 @RequestMapping("/crud_rapport")
-@CrossOrigin
+//@CrossOrigin
 public class RapportProjetController extends CrudController<RapportProjet, Long> {
 
 	@Autowired

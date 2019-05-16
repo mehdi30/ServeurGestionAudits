@@ -35,7 +35,7 @@ import com.example.demo.util.TypePlanningEnum;
 
 @RestController
 @RequestMapping("/Planning_Projet")
-@CrossOrigin
+//@CrossOrigin
 public class PlanningProjetController extends CrudController<PlanningProjet, Long> {
 
 	@Autowired
@@ -83,7 +83,7 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 
 
 		PlanningProjet planningProjet = new PlanningProjet();
-		planningProjet.setTitle(projet.getTitle() + " " + projet.getTypeProjet().getName());
+		planningProjet.setTitle("N° " + planningProjet.getNumPlanning() + " " + projet.getTitle() + " " + projet.getTypeProjet().getName());
 		planningProjet.setClassName("event-red");
 
 		List<User> list = new ArrayList<User>();
@@ -162,7 +162,7 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 
 		planningProjet.setDescription(description);
 		planningProjet.setClassName("event-red");
-		planningProjet.setTitle(d.getProcessus().getName());
+		planningProjet.setTitle("N° " + planningProjet.getNumPlanning() + " " + d.getProcessus().getName());
 		List<User> lista = new ArrayList<User>();
 
 		for (Integer i = 0; i < la.size(); i++) {
@@ -223,6 +223,20 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 		a.setEtatPlanning(EtatPlanningEnum.Planifié);
 
 		planningProjetService.update(a);
+
+	}
+	
+	@RequestMapping(value = "/counts", method = RequestMethod.GET)
+	public List<PlanningProjet> countByMonths() {
+
+		return planningProjetService.countByMonths();
+
+	}
+	
+	@RequestMapping(value = "/counte/{e}", method = RequestMethod.GET)
+	public long countByEtatPlanning(@PathVariable String e) {
+
+		return planningProjetService.countByEtatPlanning(EtatPlanningEnum.valueOf(e));
 
 	}
 

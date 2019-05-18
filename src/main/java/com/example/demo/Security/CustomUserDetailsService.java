@@ -38,6 +38,7 @@ public class CustomUserDetailsService implements UserDetailsService{
 				accountNonExpired, 
 				credentialsNonExpired, 
 				accountNonLocked, 
+				
 				getAuthorities(user.getRoles()));
 
 		return userDetails;

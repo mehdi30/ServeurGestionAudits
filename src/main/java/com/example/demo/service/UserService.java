@@ -23,6 +23,7 @@ public class UserService implements ICrudService<User, Long>{
 		return userRepository.findAll();
 	}
 	
+	
 	public User getByIdprojet(Long id) {
 		
 		return userRepository.findByProjetsId(id);

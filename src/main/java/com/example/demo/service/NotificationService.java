@@ -21,7 +21,7 @@ public class NotificationService implements ICrudService<Notification, Long>{
 	}
 	
 	public List<Notification> getByUserUsername(String username) {
-		return notificationRepository.findByUserUsername(username);
+		return notificationRepository.findByUserUsername2(username);
 	}
 
 	public long getNotSeen(String e) {

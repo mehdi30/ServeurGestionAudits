@@ -13,7 +13,7 @@ import com.example.demo.respository.UserRepository;
 
 @Service
 @Primary
-public class UserService implements ICrudService<User, Long>{
+public class UserService implements ICrudService<User, Long> {
 
 	@Autowired
 	private UserRepository userRepository;
@@ -22,27 +22,31 @@ public class UserService implements ICrudService<User, Long>{
 	public List<User> getAll() {
 		return userRepository.findAll();
 	}
-	
-	
+
 	public User getByIdprojet(Long id) {
-		
+
 		return userRepository.findByProjetsId(id);
-		
+
 	}
-	
-public Optional<User> getById(Long id) {
+
+public User getByUsername(String e) {
 		
-		return userRepository.findById(id);
+		return userRepository.findByUsername(e);
 		
 	}
 
-	
+	public Optional<User> getById(Long id) {
+
+		return userRepository.findById(id);
+
+	}
+
 	public List<User> getAllUserByDepartement(Long id) {
 		Departement departement = new Departement();
 		departement.setIdDep(id);
 		return userRepository.findByDepartement(departement);
 	}
-	
+
 	@Override
 	public void add(User user) {
 		userRepository.save(user);
@@ -59,7 +63,5 @@ public Optional<User> getById(Long id) {
 		user.setId(id);
 		userRepository.delete(user);
 	}
-
-	
 
 }

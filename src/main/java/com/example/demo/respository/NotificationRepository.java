@@ -12,8 +12,11 @@ import com.example.demo.util.EtatPlanningEnum;
 public interface NotificationRepository extends JpaRepository<Notification, Long>{
 	
 	List<Notification> findByUserId(Long id);
-	List<Notification> findByUserUsername(String username);
+	//List<Notification> findByUserUsername(String username);
 
+	@Query("Select c from Notification c where c.user.username=:e ORDER BY c.dateNot DESC")
+	List<Notification>  findByUserUsername2(@Param("e") String e); 
+	
 	@Query("Select count(c) from Notification c where c.user.username=:e AND c.nSeen = false")
     long countNotSeen(@Param("e") String e); 
 }

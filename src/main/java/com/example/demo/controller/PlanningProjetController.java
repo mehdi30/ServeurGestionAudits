@@ -50,6 +50,9 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 	private PlanningProjetRepository planningProjetRepository;
 
 	@Autowired
+	RegistrationController registerController;
+	
+	@Autowired
 	private DepartementRepository departementRepository;
 
 	@Autowired
@@ -64,7 +67,8 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 
 	@RequestMapping("/List/Planifie")
 	public List<PlanningProjet> AllPlanifie() {
-		return planningProjetService.getAll();
+		return planningProjetService.findAllOrderBydate();
+		//return planningProjetService.getAll();
 
 	}
 
@@ -137,17 +141,27 @@ public class PlanningProjetController extends CrudController<PlanningProjet, Lon
 		Notification notif = new Notification();
 		notif.setDateNot(currentDate);
 		String t = "Audit projet "+ projet.getTitle() +" a été planifié pour le " + datePlan;
+		
+
 		notif.setTitle(t);
 		for (User audite : lista) {
 			notif.setUser(audite);
 
+			String maudite = "Bonjour" + " " + audite.getUsername()+", \n \n" +  "Audit projet "+ projet.getTitle() +" a été planifié pour le " + datePlan + " "
+					+ "\n"+ " - Numéro de l'audit : " + planningProjet.getNumPlanning() + "  \n" + 
+					"Cordialement.";
 			notificationService.add(notif);
+			registerController.sendMails(audite.getEmail(), "Audit Projet Planifié", maudite);
 		}
 		for (User auditeur : list) {
 			notif.setUser(auditeur);
 
+			String maudite = "Bonjour" + " " + auditeur.getUsername()+", \n \n" +  "vous êtes chargé de faire" + " " + "l'audit projet "+ projet.getTitle() +" qui a été planifié pour le " + datePlan + " "
+					+ "\n"+ " - Numéro de l'audit : " + planningProjet.getNumPlanning() + "  \n" + 
+					"Cordialement.";
 			notificationService.add(notif);
-		}
+			registerController.sendMails(auditeur.getEmail(), "Audit Projet Planifié", maudite);
+			}
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 

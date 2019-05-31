@@ -12,8 +12,8 @@ import com.example.demo.util.EtatPlanningEnum;
 
 public interface PlanningProjetRepository extends JpaRepository<PlanningProjet, Long>{
 
-	/*@Query("SELECT p FROM PlanningProjet p WHERE p.etat = 'FALSE'")
-	List<PlanningProjet> findAllPlanifie();*/
+	@Query("SELECT p FROM PlanningProjet p ORDER BY p.start ASC")
+	List<PlanningProjet> findAllOrderBydate();
 	
 	/*@Query("SELECT p FROM PlanningProjet p WHERE p.etat = 'TRUE'")
 	List<PlanningProjet> findAllRealise();*/

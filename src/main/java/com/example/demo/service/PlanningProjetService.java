@@ -65,11 +65,10 @@ public class PlanningProjetService implements ICrudService<PlanningProjet, Long>
 	public long countByEtatPlanning(EtatPlanningEnum e) {
 		return planningProjetRepository.countPlanningByEtat(e);
 	}
-/*
-	@Override
-	public List<PlanningProjet> getAllRealise() {
-		return planningProjetRepository.findAllRealise();
-	}*/
+	
+	public List<PlanningProjet> findAllOrderBydate() {
+		return planningProjetRepository.findAllOrderBydate();
+	}
 	
 	public void updatePlanningProjet(Long id, HashMap<String, Object> mapper) {
 		String description = ((String) mapper.get("description"));
